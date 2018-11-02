@@ -1,12 +1,25 @@
+body {
+  background: linear-gradient(to top left, #622774, #c53364);
+}
+
+.button {
+  background: none;
+  color: #c3c3c4;
+  border: 2px solid #c3c3c4;
+  border-radius: 5px;
+  padding: 3vh;
+  min-width: 100px;
+}
+
 .App {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100vh;
 }
 
 .appHeader {
-  height: 15vh;
+  height: 10vh;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -14,5 +27,25 @@
   align-items: center;
 }
 
-.appHeader--butoon {
+@media all and (orientation: landscape) {
+  .appHeader {
+    height: 15%;
+  }
+
+  .appHeader--logo {
+    width: 25vw;
+  }
+
+  .appFooter {
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .appFooter .button {
+    font-size: 20px;
+    width: 40%;
+    height: 100%;
+  }
 }

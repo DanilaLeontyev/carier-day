@@ -8,12 +8,18 @@ interface IAppState {
 
 const appHeader = (
   <header className="appHeader">
-    <img className="appHeader--logo" src={logo} width="50%" />
-    <button className="appHeader--button">Далее</button>
+    <img className="appHeader--logo" src={logo} />
+    <button className="button">Далее</button>
   </header>
 );
 
-class App extends Component<any> {
+const appFooter = (
+  <footer className="appFooter">
+    <button className="appFooter button">Предыдущее</button>
+    <button className="appFooter button">Далее</button>
+  </footer>
+);
+class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -25,7 +31,7 @@ class App extends Component<any> {
     return (
       <div className="App">
         {appHeader}
-        <button>Далее</button>
+        {appFooter}
       </div>
     );
   }
