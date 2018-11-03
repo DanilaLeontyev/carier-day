@@ -26,5 +26,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/react-beautiful-dnd": "^7.1.2",
+    "react-beautiful-dnd": "^9.0.2"
+  }
 }
