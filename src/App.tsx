@@ -3,7 +3,7 @@ import logo from './assets/logo.svg';
 import './App.css';
 import './component/Greetings';
 import Greetings from './component/Greetings';
-import BinarySearchQuestion from './component/BinarySearchQuestion';
+import Algorithm from './component/Algorithm';
 import EmailForm from './component/EmailForm';
 
 interface IAppState {
@@ -14,7 +14,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 0
+      questionNumber: 2
     };
   }
 
@@ -49,7 +49,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 2: {
-        return <BinarySearchQuestion />;
+        return <Algorithm />;
       }
 
       case 3: {
