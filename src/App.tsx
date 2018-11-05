@@ -4,6 +4,7 @@ import './App.css';
 import './component/Greetings';
 import Greetings from './component/Greetings';
 import BinarySearchQuestion from './component/BinarySearchQuestion';
+import EmailForm from './component/EmailForm';
 
 interface IAppState {
   questionNumber: number;
@@ -44,11 +45,11 @@ class App extends Component<any, IAppState> {
       }
 
       case 1: {
-        return <BinarySearchQuestion />;
+        return <EmailForm />;
       }
 
       case 2: {
-        return <span>page2</span>;
+        return <BinarySearchQuestion />;
       }
 
       case 3: {
@@ -60,6 +61,10 @@ class App extends Component<any, IAppState> {
       }
 
       case 5: {
+        return <span>page5</span>;
+      }
+
+      case 6: {
         return <span>page5</span>;
       }
 
@@ -79,13 +84,49 @@ class App extends Component<any, IAppState> {
         );
       }
       case 1: {
-        return <div />;
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Далее
+          </button>
+        );
       }
       case 2: {
-        return <div />;
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Далее
+          </button>
+        );
       }
       case 3: {
-        return <div />;
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Далее
+          </button>
+        );
+      }
+
+      case 4: {
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Далее
+          </button>
+        );
+      }
+
+      case 5: {
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Далее
+          </button>
+        );
+      }
+
+      case 6: {
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Далее
+          </button>
+        );
       }
 
       default: {

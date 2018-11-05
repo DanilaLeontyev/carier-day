@@ -31,7 +31,8 @@ body {
 }
 
 h1,
-p {
+p,
+label {
   color: var(--main-theme-color);
 }
 

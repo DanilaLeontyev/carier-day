@@ -1,8 +1,9 @@
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  height: 100vh;
 }
 
 .appHeader {
@@ -25,8 +26,7 @@
 .appFooter {
   width: 100%;
   display: flex;
-  position: relative;
-  bottom: 0;
+  margin-bottom: 10px;
   justify-content: center;
 }
 

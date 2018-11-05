@@ -5,12 +5,12 @@
   margin: 10px 10px;
 }
 
-.Greetings--text {
-  margin-left: 30px;
-}
-
 @media all and (orientation: landscape) {
   .Greetings {
     flex-direction: row;
+  }
+
+  .Greetings--text {
+    margin-left: 30px;
   }
 }
