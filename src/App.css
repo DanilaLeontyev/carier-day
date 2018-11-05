@@ -1,71 +1,55 @@
-:root {
-  --main-theme-color: black;
-}
-
-body {
-  background: white;
-}
-
-h1,
-p {
-  color: var(--main-theme-color);
-}
-
-.hidden {
-  display: none;
-}
-
-.button {
-  background: none;
-  color: var(--main-theme-color);
-  border: 2px solid var(--main-theme-color);
-  border-radius: 5px;
-}
-
 .App {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
 }
 
 .appHeader {
-  height: 10%;
   width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  padding: 2%;
+  justify-content: center;
 }
 
 .appHeader--logo {
-  width: 50%;
+  width: 60%;
 }
 
-.appHeader--buttonContainer {
-  width: 50%;
+.appMain {
+  width: 90%;
+  text-align: center;
+}
+
+.appFooter {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  height: 100%;
-}
-
-.appHeader--buttonContainer > .button {
-  min-width: 40%;
-}
-
-.greetings {
-  max-width: 60%;
+  position: relative;
+  bottom: 0;
+  justify-content: center;
 }
 
 @media all and (orientation: landscape) {
   .appHeader {
-    height: 15%;
+    justify-content: flex-start;
   }
 
   .appHeader--logo {
-    width: 25vw;
+    margin-left: 30px;
+    width: 30%;
+  }
+
+  .appMain {
+    width: 85%;
+    text-align: left;
+  }
+
+  .appFooter {
+    justify-content: flex-end;
+  }
+
+  .appFooter:last-child {
+    margin-right: 50px;
   }
 }

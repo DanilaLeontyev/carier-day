@@ -37,7 +37,7 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  public choosePage = (): JSX.Element => {
+  public mainPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
         return <Greetings />;
@@ -64,30 +64,44 @@ class App extends Component<any, IAppState> {
       }
 
       default: {
-        return <span>error</span>;
+        return <span>Error</span>;
       }
     }
   };
 
+  public footerPage = (): JSX.Element => {
+    switch (this.state.questionNumber) {
+      case 0: {
+        return (
+          <button className="button" onClick={this.nextPage}>
+            Начать тестирование
+          </button>
+        );
+      }
+      case 1: {
+        return <div />;
+      }
+      case 2: {
+        return <div />;
+      }
+      case 3: {
+        return <div />;
+      }
+
+      default: {
+        return <span>Error</span>;
+      }
+    }
+  };
   render() {
     const { questionNumber } = this.state;
     return (
       <div className="App">
         <header className="appHeader">
           <img className="appHeader--logo" src={logo} />
-          <div className="appHeader--buttonContainer">
-            <button
-              className={`button ${questionNumber ? '' : 'hidden'}`}
-              onClick={this.prevPage}
-            >
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
         </header>
-        {this.choosePage()}
+        <main className="appMain">{this.mainPage()}</main>
+        <footer className="appFooter">{this.footerPage()}</footer>
       </div>
     );
   }

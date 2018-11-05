@@ -14,41 +14,39 @@ class BinarySearchQuestion extends Component<any> {
 
   render() {
     return (
-      <main className="binarySearchQuestion">
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provider, snapshot): any => (
-              <div ref={provider.innerRef}>
-                <Draggable key="1" draggableId="1" index={1}>
-                  {(provider, snapshot): any => (
-                    <div
-                      ref={provider.innerRef}
-                      {...provider.draggableProps}
-                      {...provider.dragHandleProps}
-                    >
-                      Hello world
-                    </div>
-                  )}
-                </Draggable>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provider, snapshot): any => (
+            <div ref={provider.innerRef}>
+              <Draggable key="1" draggableId="1" index={1}>
+                {(provider, snapshot): any => (
+                  <div
+                    ref={provider.innerRef}
+                    {...provider.draggableProps}
+                    {...provider.dragHandleProps}
+                  >
+                    Hello world
+                  </div>
+                )}
+              </Draggable>
 
-                <Draggable key="2" draggableId="2" index={2}>
-                  {(provider, snapshot): any => (
-                    <div
-                      ref={provider.innerRef}
-                      {...provider.draggableProps}
-                      {...provider.dragHandleProps}
-                    >
-                      Hello world
-                    </div>
-                  )}
-                </Draggable>
+              <Draggable key="2" draggableId="2" index={2}>
+                {(provider, snapshot): any => (
+                  <div
+                    ref={provider.innerRef}
+                    {...provider.draggableProps}
+                    {...provider.dragHandleProps}
+                  >
+                    Hello world
+                  </div>
+                )}
+              </Draggable>
 
-                {provider.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </main>
+              {provider.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     );
   }
 }
