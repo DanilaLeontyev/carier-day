@@ -5,6 +5,7 @@ import './component/Greetings';
 import Greetings from './component/Greetings';
 import Algorithm from './component/Algorithm';
 import EmailForm from './component/EmailForm';
+import Testing from './component/Testing';
 
 interface IAppState {
   questionNumber: number;
@@ -14,7 +15,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 2
+      questionNumber: 3
     };
   }
 
@@ -53,7 +54,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 3: {
-        return <span>page3</span>;
+        return <Testing />;
       }
 
       case 4: {
