@@ -5,19 +5,27 @@ import './Analitic.css';
 
 interface IAnaliticState {
   choosenName: string;
+  choosenProf: string;
 }
 
 class Analitic extends Component<any, IAnaliticState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      choosenName: ''
+      choosenName: '',
+      choosenProf: ''
     };
   }
 
   chooseName = (value: string) => (e: any) => {
     this.setState({
       choosenName: value
+    });
+  };
+
+  chooseProf = (value: string) => (e: any) => {
+    this.setState({
+      choosenProf: value
     });
   };
 
@@ -34,24 +42,77 @@ class Analitic extends Component<any, IAnaliticState> {
             Олег: "Я убил Жоржа, Павлик не виноват!" <br />
             Павел: "Олег никого не убивал. Убийца Андрей!" <br />
             Андрей "Я не виновен. Преступник - Олег!" <br />
-            Кто убил Жоржа?
+            Кто убил Жоржа и какая профессия у его убийцы?
           </p>
         </div>
 
-        <div className="Analitic--buttonContainer">
-          <button className="button" onClick={this.chooseName('Андрей')}>
-            Андрей
-          </button>
-          <button className="button" onClick={this.chooseName('Павел')}>
-            Павел
-          </button>
-          <button className="button" onClick={this.chooseName('Олег')}>
-            Олег
-          </button>
-        </div>
+        <div className="Analitic--buttonContainer__landscape">
+          <div className="buttonContainer--column__label">
+            <div className="column--label">Имя:</div>
+            <div className="column--label">Профессия:</div>
+          </div>
 
+          <div className="buttonContainer--column">
+            <button className="button" onClick={this.chooseName('Андрей')}>
+              Андрей
+            </button>
+            <button className="button" onClick={this.chooseProf('Врач')}>
+              Врач
+            </button>
+          </div>
+
+          <div className="buttonContainer--column">
+            <button className="button" onClick={this.chooseName('Павел')}>
+              Павел
+            </button>
+            <button className="button" onClick={this.chooseProf('Продавец')}>
+              Продавец
+            </button>
+          </div>
+
+          <div className="buttonContainer--column">
+            <button className="button" onClick={this.chooseName('Олег')}>
+              Олег
+            </button>
+            <button className="button" onClick={this.chooseProf('Бухгалтер')}>
+              Бухгалтер
+            </button>
+          </div>
+        </div>
+        
+        <div className="Analitic--buttonContainer">
+          <div className="column--label">Имя:</div>
+
+          <div className="buttonContainer--row">
+            <button className="button" onClick={this.chooseName('Андрей')}>
+              Андрей
+            </button>
+            <button className="button" onClick={this.chooseName('Павел')}>
+              Павел
+            </button>
+            <button className="button" onClick={this.chooseName('Олег')}>
+              Олег
+            </button>
+          </div>
+
+          <div className="column--label">Профессия:</div>
+          <div className="buttonContainer--row">
+            <button className="button" onClick={this.chooseProf('Врач')}>
+              Врач
+            </button>
+
+            <button className="button" onClick={this.chooseProf('Продавец')}>
+              Продавец
+            </button>
+
+            <button className="button" onClick={this.chooseProf('Бухгалтер')}>
+              Бухгалтер
+            </button>
+          </div>
+        </div>
+        
         <div className="Analitic--answer">
-          Ваш выбор: {this.state.choosenName}
+          Ваш выбор: {this.state.choosenName} {this.state.choosenProf}
         </div>
       </div>
     );
