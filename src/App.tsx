@@ -18,7 +18,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 4
+      questionNumber: 5
     };
   }
 
@@ -151,11 +151,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 6: {
-        return (
-          <button className="button" onClick={this.prevPage}>
-            Назад
-          </button>
-        );
+        return <></>;
       }
 
       default: {

@@ -2,12 +2,26 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.button__selected {
+  background-color: red;
 }
 
 .choose--column {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.choose--column .button {
+  margin-bottom: 20px;
+}
+
+.choose--column .button:last-child {
+  margin-bottom: 0;
 }
 
 .choose--column:first-child {

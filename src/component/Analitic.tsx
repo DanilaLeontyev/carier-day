@@ -36,13 +36,13 @@ class Analitic extends Component<any, IAnaliticState> {
           <img src={chain} alt="chain" className="Analitic--pic" />
           <p className="Analitic--text">
             По подозрению в убийстве Жоржа задержали Олега, Павла и Андрея. Из
-            них один врач, другой продавец, третий бухгалтер. В ходе следствия
-            выяснили, что продавец всегда лжет, бухгалтер всегда говорит правду,
-            а врач лжет через раз. Их утверждения: <br />
+            них один врач, другой продавец, третий бухгалтер. <br />В ходе
+            следствия выяснили, что продавец всегда лжет, бухгалтер всегда
+            говорит правду, а врач лжет через раз. Их утверждения: <br />
             Олег: "Я убил Жоржа, Павлик не виноват!" <br />
             Павел: "Олег никого не убивал. Убийца Андрей!" <br />
             Андрей "Я не виновен. Преступник - Олег!" <br />
-            Кто убил Жоржа и какая профессия у его убийцы?
+            Кто убил Жоржа и какая у него профессия?
           </p>
         </div>
 
@@ -79,7 +79,7 @@ class Analitic extends Component<any, IAnaliticState> {
             </button>
           </div>
         </div>
-        
+
         <div className="Analitic--buttonContainer">
           <div className="column--label">Имя:</div>
 
@@ -110,7 +110,7 @@ class Analitic extends Component<any, IAnaliticState> {
             </button>
           </div>
         </div>
-        
+
         <div className="Analitic--answer">
           Ваш выбор: {this.state.choosenName} {this.state.choosenProf}
         </div>
