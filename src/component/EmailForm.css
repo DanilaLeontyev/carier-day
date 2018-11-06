@@ -11,7 +11,7 @@
 
 .EmailForm--img {
   width: 100px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .EmailForm--img__landscape {
@@ -48,5 +48,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin-top: 10px;
   }
 }

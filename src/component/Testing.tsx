@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
 import './Testing.css';
-import { number } from 'prop-types';
 
 interface ITestingState {
   expression: string;
@@ -18,26 +17,30 @@ class Testing extends Component<any, ITestingState> {
   }
 
   checkEnd = (values: string) => {
+    let newValues;
     if (
       values[values.length - 1] === '+' ||
       values[values.length - 1] === '-'
     ) {
       values = values.slice(0, -1);
       this.checkEnd(values);
+    } else {
+      newValues = values;
     }
-    return values;
+    return newValues ? newValues : '0';
   };
 
   calculateResult = () => {
     let result: number = 0;
     let values = this.state.expression
       .replace(/[^-()\d/*+.]/g, '')
-      .replace(/-{2,}/g, '-')
+      .replace(/-{2,}/g, '+')
       .replace(/\+{2,}/g, '+')
-      .replace(/\+-/g, '+') // тут ошибка, должены быть -
+      .replace(/\+-/g, '+') // тут ошибка, должен быть -
       .replace(/-\+/g, '-');
 
     values = this.checkEnd(values);
+    console.log(values);
     try {
       result = eval(values);
     } catch {
@@ -58,11 +61,13 @@ class Testing extends Component<any, ITestingState> {
       return;
     }
 
-    this.setState(state => {
-      return {
-        expression: state.expression.concat(value)
-      };
-    });
+    if (this.state.expression.length <= 15) {
+      this.setState(state => {
+        return {
+          expression: state.expression.concat(value)
+        };
+      });
+    }
   };
 
   clearExpression = () => {
@@ -77,18 +82,51 @@ class Testing extends Component<any, ITestingState> {
       <div className="Testing">
         <p>Найдите баг в программе</p>
         <div className="Testing--calculator">
-          <button onClick={this.addToExpression('3')}>3</button>
-          <button onClick={this.addToExpression('2')}>2</button>
-          <button onClick={this.addToExpression('+')}>+</button>
-          <button onClick={this.addToExpression('-')}>-</button>
+          <div className="calculator--result">
+            <div className="result--expression">{this.state.expression}</div>
+            <div className="result--answer">= {this.state.result}</div>
+          </div>
 
-          <button onClick={this.calculateResult}>Посчитать</button>
-          <button onClick={this.clearExpression}>Очистить</button>
+          <div className="calculator--buttonContainer">
+            <div className="buttonContainer--column">
+              <button className="button" onClick={this.addToExpression('3')}>
+                3
+              </button>
+              <button className="button" onClick={this.addToExpression('2')}>
+                2
+              </button>
+            </div>
 
-          <div className="calculator--result">{this.state.expression}</div>
-          <div>{this.state.result}</div>
+            <div className="buttonContainer--column">
+              <button className="button" onClick={this.addToExpression('+')}>
+                +
+              </button>
+              <button className="button" onClick={this.addToExpression('-')}>
+                -
+              </button>
+            </div>
+
+            <div className="buttonContainer--column">
+              <button className="button" onClick={this.calculateResult}>
+                Посчитать
+              </button>
+              <button className="button" onClick={this.clearExpression}>
+                Очистить
+              </button>
+            </div>
+          </div>
         </div>
-        <input type="" placeholder="Ваш ответ" />
+
+        <label htmlFor="answer">
+          {' '}
+          Напишите выражение, которое приводит к ошибке{' '}
+        </label>
+        <input
+          id="answer"
+          className="Testing--answer"
+          type="tel"
+          placeholder="Выражение"
+        />
       </div>
     );
   }

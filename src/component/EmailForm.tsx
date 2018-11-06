@@ -10,12 +10,14 @@ class EmailForm extends Component<any> {
         <img className="EmailForm--img" src={listPic} alt="list" />
 
         <p>
-          Введите регистрационные данные: <br />
+          Введите регистрационные данные<br />
         </p>
 
         <div className="EmailForm--container">
           <form className="EmailForm--form">
-            <label htmlFor="email">E-mail(*)</label>
+            <label htmlFor="FIO">ФИО:</label>
+            <input id="FIO" type="text" />
+            <label htmlFor="email">E-mail(*):</label>
             <input id="email" type="email" required={true} />
             <label htmlFor="tel">Телефон:</label>
             <input id="tel" type="tel" />

@@ -18,7 +18,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 2
+      questionNumber: 3
     };
   }
 
