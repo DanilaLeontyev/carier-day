@@ -7,6 +7,8 @@ import Algorithm from './component/Algorithm';
 import EmailForm from './component/EmailForm';
 import Testing from './component/Testing';
 import Analitic from './component/Analitic';
+import YouWant from './component/YouWant';
+import Leave from './component/Leave';
 
 interface IAppState {
   questionNumber: number;
@@ -16,12 +18,12 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 4
+      questionNumber: 2
     };
   }
 
   public nextPage = (e: any): void => {
-    if (this.state.questionNumber < 5) {
+    if (this.state.questionNumber < 6) {
       this.setState(state => {
         return {
           questionNumber: state.questionNumber + 1
@@ -63,11 +65,11 @@ class App extends Component<any, IAppState> {
       }
 
       case 5: {
-        return <span>page5</span>;
+        return <YouWant />;
       }
 
       case 6: {
-        return <span>page5</span>;
+        return <Leave />;
       }
 
       default: {
@@ -87,46 +89,71 @@ class App extends Component<any, IAppState> {
       }
       case 1: {
         return (
-          <button className="button" onClick={this.nextPage}>
-            Далее
-          </button>
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
+            </button>
+          </div>
         );
       }
       case 2: {
         return (
-          <button className="button" onClick={this.nextPage}>
-            Далее
-          </button>
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
+            </button>
+          </div>
         );
       }
       case 3: {
         return (
-          <button className="button" onClick={this.nextPage}>
-            Далее
-          </button>
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
+            </button>
+          </div>
         );
       }
 
       case 4: {
         return (
-          <button className="button" onClick={this.nextPage}>
-            Далее
-          </button>
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
+            </button>
+          </div>
         );
       }
 
       case 5: {
         return (
-          <button className="button" onClick={this.nextPage}>
-            Далее
-          </button>
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
+            </button>
+          </div>
         );
       }
 
       case 6: {
         return (
-          <button className="button" onClick={this.nextPage}>
-            Далее
+          <button className="button" onClick={this.prevPage}>
+            Назад
           </button>
         );
       }
@@ -136,6 +163,7 @@ class App extends Component<any, IAppState> {
       }
     }
   };
+
   render() {
     return (
       <div className="App">

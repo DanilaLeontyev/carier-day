@@ -50,7 +50,7 @@ const data = [
   },
   {
     id: '6',
-    content: 'else if(value < list[middle]'
+    content: 'else if(value < list[middle])'
   },
   {
     id: '7',

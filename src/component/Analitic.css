@@ -1,3 +1,32 @@
 .Analitic--pic {
   width: 30%;
 }
+
+.Analitic--buttonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Analitic--answer {
+  margin-bottom: 10px;
+  margin: 0 auto;
+}
+
+@media all and (orientation: landscape) {
+  .Analitic--pic {
+    width: 25%;
+    align-self: center;
+  }
+
+  .Analitic--text {
+    margin-left: 10px;
+  }
+
+  .Analitic--task {
+    display: flex;
+    flex-direction: row;
+  }
+}
