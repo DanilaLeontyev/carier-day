@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "caa7b0ef8da169e8b0c5",
+    "revision": "9f8e2b0c4acfc413367c",
     "url": "/carier-day/static/css/main.6ab7590d.chunk.css"
   },
   {
-    "revision": "caa7b0ef8da169e8b0c5",
-    "url": "/carier-day/static/js/main.caa7b0ef.chunk.js"
+    "revision": "9f8e2b0c4acfc413367c",
+    "url": "/carier-day/static/js/main.9f8e2b0c.chunk.js"
   },
   {
     "revision": "9c5c3f6dffcf40585b1c",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/carier-day/static/media/FiraCode-Regular.24310bd0.woff2"
   },
   {
-    "revision": "190ba484058100573f77da02ce056a34",
+    "revision": "5bb74200a08d6a3015651fdcb9a698ef",
     "url": "/carier-day/index.html"
   }
 ];

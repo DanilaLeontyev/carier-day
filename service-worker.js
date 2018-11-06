@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/carier-day/precache-manifest.edf9d3472618addf535b5736e4dff697.js"
+  "/carier-day/precache-manifest.1ebdcac76c1d82018c9ef3566616d2e6.js"
 );
 
 workbox.clientsClaim();
