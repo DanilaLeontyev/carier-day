@@ -7,7 +7,9 @@
 }
 
 .button__selected {
-  background-color: red;
+  background-color: var(--main-theme-color);
+  color: black;
+  border: 2px solid black;
 }
 
 .choose--column {
