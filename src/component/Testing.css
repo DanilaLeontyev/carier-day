@@ -56,4 +56,9 @@
   width: 60%;
   border: 1px solid var(--main-theme-color);
   margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.Testing label {
+  margin-top: 15px;
 }
