@@ -40,7 +40,7 @@ class Testing extends Component<any, ITestingState> {
       .replace(/-\+/g, '-');
 
     values = this.checkEnd(values);
-    console.log(values);
+    
     try {
       result = eval(values);
     } catch {

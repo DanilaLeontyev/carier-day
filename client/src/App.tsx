@@ -22,15 +22,15 @@ class App extends Component<any, IAppState> {
     };
   }
 
-  // componentDidMount() {
-  //   this.getData();
-  // }
+  componentDidMount() {
+    this.getData();
+  }
 
-  // getData = () => {
-  //   fetch('/api/data')
-  //     .then(res => res.json())
-  //     .then(data => console.log(data));
-  // };
+  getData = () => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
 
   nextPage = (e: any): void => {
     if (this.state.questionNumber < 6) {
