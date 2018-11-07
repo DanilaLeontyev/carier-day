@@ -32,6 +32,22 @@ app.get('/api/data', (req, res) => {
   );
 });
 
+app.post('/api/people', (req, res) => {
+  MongoClient.connect(
+    MONGO_URL,
+    { useNewUrlParser: true },
+    (err, client) => {
+      if (err) console.log(err);
+      let data = req.body;
+      let people = client.db('carier-day').collection('people');
+
+      people.insertOne(data, (err, result) => {
+        res.send(data);
+      });
+    }
+  );
+});
+
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
