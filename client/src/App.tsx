@@ -22,7 +22,17 @@ class App extends Component<any, IAppState> {
     };
   }
 
-  public nextPage = (e: any): void => {
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+
+  nextPage = (e: any): void => {
     if (this.state.questionNumber < 6) {
       this.setState(state => {
         return {
@@ -32,7 +42,7 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  public prevPage = (e: any): void => {
+  prevPage = (e: any): void => {
     if (this.state.questionNumber > 0) {
       this.setState(state => {
         return {
@@ -42,7 +52,7 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  public mainPage = (): JSX.Element => {
+  mainPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
         return <Greetings />;
@@ -78,7 +88,7 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  public footerPage = (): JSX.Element => {
+  footerPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
         return (

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": "http://danilaleontyev.github.io/carier-day",
   "private": true,
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@types/jest": "23.3.9",
     "@types/node": "10.12.2",
