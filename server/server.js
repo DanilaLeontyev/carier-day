@@ -12,8 +12,8 @@ const MONGO_COL_NAME = 'people';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/img', express.static(__dirname + '/data/img/'));
 
+// API calls
 // Запрос на получение всех фильмов из базы
 app.get('/api/data', (req, res) => {
   MongoClient.connect(
@@ -52,5 +52,15 @@ app.get('/api/data', (req, res) => {
 //     }
 //   );
 // });
+
+//production
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
