@@ -1,0 +1,10 @@
+.Leave--pic {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.Leave {
+  display: flex;
+  flex-direction: column;
+}

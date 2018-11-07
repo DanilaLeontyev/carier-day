@@ -1,0 +1,53 @@
+.EmailForm--form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.EmailForm--form input {
+  margin-bottom: 20px;
+  height: 30px;
+}
+
+.EmailForm--img {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.EmailForm--img__landscape {
+  display: none;
+}
+
+@media all and (orientation: landscape) {
+  .EmailForm p {
+    text-align: center;
+  }
+
+  .EmailForm--form label {
+    margin-bottom: 5px;
+  }
+
+  .EmailForm--form {
+    margin: 0;
+    width: 50%;
+  }
+
+  .EmailForm--img {
+    display: none;
+  }
+
+  .EmailForm--img__landscape {
+    align-self: center;
+    margin-right: 60px;
+    width: 120px;
+    display: block;
+  }
+
+  .EmailForm--container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}

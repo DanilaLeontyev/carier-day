@@ -1,0 +1,54 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appHeader {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.appHeader--logo {
+  width: 60%;
+}
+
+.appMain {
+  width: 90%;
+  text-align: center;
+}
+
+.appFooter {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+@media all and (orientation: landscape) {
+  .appHeader {
+    justify-content: flex-start;
+  }
+
+  .appHeader--logo {
+    margin-left: 30px;
+    width: 30%;
+  }
+
+  .appMain {
+    width: 85%;
+    text-align: left;
+  }
+
+  .appFooter {
+    justify-content: flex-end;
+  }
+
+  .appFooter:last-child {
+    margin-right: 50px;
+  }
+}

@@ -1,0 +1,25 @@
+.Algorithm--dragItem {
+  background-color: white;
+  border: 1px solid black;
+  padding: 7px;
+  text-align: left;
+  font-family: 'FiraCode';
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.Algorithm--text {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.Algorithm--dropZone {
+  margin: 10px auto;
+}
+
+@media all and (orientation: landscape) {
+  .Algorithm--dropZone {
+    width: 60%;
+    margin: 10px auto;
+  }
+}

@@ -1,0 +1,40 @@
+.YouWant--choose {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.button__selected {
+  background-color: var(--main-theme-color);
+  color: black;
+  border: 2px solid black;
+}
+
+.choose--column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.choose--column .button {
+  margin-bottom: 20px;
+}
+
+.choose--column .button:last-child {
+  margin-bottom: 0;
+}
+
+.choose--column:first-child {
+  margin-right: 20px;
+}
+
+.choose--column:last-child {
+  margin-left: 20px;
+}
+
+.YouWant--pic {
+  width: 20%;
+  align-self: center;
+}
