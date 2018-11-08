@@ -8,14 +8,32 @@ interface IAnaliticState {
   choosenProf: string;
 }
 
-class Analitic extends Component<any, IAnaliticState> {
-  constructor(props: any) {
+interface IAnaliticProps {
+  onSubmitTask(result: boolean): void;
+}
+
+class Analitic extends Component<IAnaliticProps, IAnaliticState> {
+  constructor(props: IAnaliticProps) {
     super(props);
     this.state = {
       choosenName: '',
       choosenProf: ''
     };
   }
+
+  handleSubmitTask = (e: any) => {
+    const result = this.checkResult();
+    this.props.onSubmitTask(result);
+  };
+
+  checkResult = (): boolean => {
+    if (
+      this.state.choosenName === 'Андрей' &&
+      this.state.choosenProf === 'Продавец'
+    ) {
+      return true;
+    } else return false;
+  };
 
   chooseName = (value: string) => (e: any) => {
     this.setState({
@@ -114,6 +132,10 @@ class Analitic extends Component<any, IAnaliticState> {
         <div className="Analitic--answer">
           Ваш выбор: {this.state.choosenName} {this.state.choosenProf}
         </div>
+
+        <button className="button" onClick={this.handleSubmitTask}>
+          Отправить решение
+        </button>
       </div>
     );
   }

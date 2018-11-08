@@ -172,7 +172,7 @@ class Testing extends Component<ITestingProps, ITestingState> {
           Напишите выражение, которое приводит к ошибке
         </label>
         <button className="button" onClick={this.handleSubmitTask}>
-          Принять ответ
+          Отправить решение
         </button>
       </div>
     );

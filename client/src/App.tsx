@@ -20,7 +20,7 @@ interface IPesonData {
   email: string;
   tel: string;
   tasks: ITask;
-  choosen: string;
+  choosenProf: string;
 }
 
 interface ITask {
@@ -43,7 +43,7 @@ class App extends Component<any, IAppState> {
           testing: false,
           analitic: false
         },
-        choosen: ''
+        choosenProf: ''
       }
     };
   }
@@ -137,6 +137,20 @@ class App extends Component<any, IAppState> {
     }));
   };
 
+  analiticTaskSubmit = (result: boolean) => {
+    // TODO: дописать отправку решения на сервер
+
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        tasks: {
+          ...state.data.tasks,
+          analitic: result
+        }
+      }
+    }));
+  };
+
   footerPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
@@ -198,7 +212,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 4: {
-        return <Analitic />;
+        return <Analitic onSubmitTask={this.analiticTaskSubmit} />;
       }
 
       case 5: {
