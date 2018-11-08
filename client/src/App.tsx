@@ -33,7 +33,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 3,
+      questionNumber: 5,
       data: {
         id: '',
         email: '',
@@ -151,6 +151,17 @@ class App extends Component<any, IAppState> {
     }));
   };
 
+  chooseProf = (result: string) => {
+    // TODO: дописать отправку решения на сервер
+
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        choosenProf: result
+      }
+    }));
+  };
+
   footerPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
@@ -164,9 +175,10 @@ class App extends Component<any, IAppState> {
         );
       }
 
-      case 4:
+      case 2:
       case 3:
-      case 2: {
+      case 4:
+      case 5: {
         return (
           <div>
             <button className="button" onClick={this.prevPage}>
@@ -216,7 +228,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 5: {
-        return <YouWant />;
+        return <YouWant onSubmitTask={this.chooseProf} />;
       }
 
       case 6: {

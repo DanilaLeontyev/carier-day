@@ -5,8 +5,13 @@ import lamp from '../assets/lamp.png';
 interface IYouWantState {
   choosenProf: string;
 }
-class YouWant extends Component<any, IYouWantState> {
-  constructor(props: any) {
+
+interface IYouWantPrps {
+  onSubmitTask(result: string): void;
+}
+
+class YouWant extends Component<IYouWantPrps, IYouWantState> {
+  constructor(props: IYouWantPrps) {
     super(props);
     this.state = {
       choosenProf: ''
@@ -25,6 +30,8 @@ class YouWant extends Component<any, IYouWantState> {
     this.setState({
       choosenProf: choosenProf
     });
+
+    this.props.onSubmitTask(choosenProf);
   };
 
   getAllButton = () => {
