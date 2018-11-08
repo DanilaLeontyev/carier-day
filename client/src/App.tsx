@@ -33,13 +33,13 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 6,
+      questionNumber: 1,
       data: {
         id: '',
         email: '',
         tel: '',
         tasks: {
-          programmer: true,
+          programmer: false,
           testing: false,
           analitic: false
         },
@@ -174,6 +174,8 @@ class App extends Component<any, IAppState> {
         );
       }
 
+      case 6:
+      case 1:
       case 2:
       case 3:
       case 4:
