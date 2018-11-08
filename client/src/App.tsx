@@ -33,7 +33,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 2,
+      questionNumber: 3,
       data: {
         id: '',
         email: '',
@@ -110,7 +110,7 @@ class App extends Component<any, IAppState> {
   };
 
   algorithmTaskSubmit = (result: boolean) => {
-// TODO: дописать отправку решения на сервер
+    // TODO: дописать отправку решения на сервер
 
     this.setState(state => ({
       data: {
@@ -118,6 +118,20 @@ class App extends Component<any, IAppState> {
         tasks: {
           ...state.data.tasks,
           programmer: result
+        }
+      }
+    }));
+  };
+
+  testingTaskSubmit = (result: boolean) => {
+    // TODO: дописать отправку решения на сервер
+
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        tasks: {
+          ...state.data.tasks,
+          testing: result
         }
       }
     }));
@@ -180,7 +194,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 3: {
-        return <Testing />;
+        return <Testing onSubmitTask={this.testingTaskSubmit} />;
       }
 
       case 4: {

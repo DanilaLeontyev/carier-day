@@ -7,8 +7,12 @@ interface ITestingState {
   result: number | string;
 }
 
-class Testing extends Component<any, ITestingState> {
-  constructor(props: any) {
+interface ITestingProps {
+  onSubmitTask(result: boolean): void;
+}
+
+class Testing extends Component<ITestingProps, ITestingState> {
+  constructor(props: ITestingProps) {
     super(props);
     this.state = {
       expression: '',
@@ -16,18 +20,41 @@ class Testing extends Component<any, ITestingState> {
     };
   }
 
+  handleSubmitTask = (e: any) => {
+    const result = this.checkResult(this.state.expression);
+    this.props.onSubmitTask(result);
+  };
+
+  checkResult = (value: string) => {
+    let wrongAnswer = value
+      .replace(/[^-()\d/*+.]/g, '')
+      .replace(/-{2,}/g, '+')
+      .replace(/\+{2,}/g, '+')
+      .replace(/\+-/g, '+') // тут ошибка, должен быть -
+      .replace(/-\+/g, '-');
+    wrongAnswer = this.checkEnd(wrongAnswer);
+
+    let rightAnswer = value
+      .replace(/[^-()\d/*+.]/g, '')
+      .replace(/-{2,}/g, '+')
+      .replace(/\+{2,}/g, '+')
+      .replace(/\+-/g, '-') // тут ошибка, должен быть -
+      .replace(/-\+/g, '-');
+    rightAnswer = this.checkEnd(rightAnswer);
+
+    if (rightAnswer === wrongAnswer) {
+      return false;
+    } else return true;
+  };
+
   checkEnd = (values: string) => {
-    let newValues;
-    if (
+    while (
       values[values.length - 1] === '+' ||
       values[values.length - 1] === '-'
     ) {
       values = values.slice(0, -1);
-      this.checkEnd(values);
-    } else {
-      newValues = values;
     }
-    return newValues ? newValues : '0';
+    return values;
   };
 
   calculateResult = () => {
@@ -40,7 +67,7 @@ class Testing extends Component<any, ITestingState> {
       .replace(/-\+/g, '-');
 
     values = this.checkEnd(values);
-    
+
     try {
       result = eval(values);
     } catch {
@@ -57,16 +84,40 @@ class Testing extends Component<any, ITestingState> {
   addToExpression = (value: string) => (
     e: React.SyntheticEvent<EventTarget>
   ) => {
+    let exp = this.state.expression;
+
     if (!(e.target instanceof HTMLButtonElement)) {
       return;
     }
 
-    if (this.state.expression.length <= 15) {
+    if (
+      (exp[0] === '+' || exp[0] === '-') &&
+      (value !== '2' && value !== '3') &&
+      exp.length < 2
+    ) {
       this.setState(state => {
         return {
-          expression: state.expression.concat(value)
+          expression: value
         };
       });
+    } else {
+      if (
+        (exp[exp.length - 1] === '+' || exp[exp.length - 1] === '-') &&
+        (exp[exp.length - 2] === '+' || exp[exp.length - 2] === '-') &&
+        (value !== '2' && value !== '3')
+      ) {
+        this.setState(state => {
+          return;
+        });
+      } else {
+        if (exp.length <= 15) {
+          this.setState(state => {
+            return {
+              expression: state.expression.concat(value)
+            };
+          });
+        }
+      }
     }
   };
 
@@ -118,15 +169,11 @@ class Testing extends Component<any, ITestingState> {
         </div>
 
         <label htmlFor="answer">
-          {' '}
-          Напишите выражение, которое приводит к ошибке{' '}
+          Напишите выражение, которое приводит к ошибке
         </label>
-        <input
-          id="answer"
-          className="Testing--answer"
-          type="tel"
-          placeholder="Выражение"
-        />
+        <button className="button" onClick={this.handleSubmitTask}>
+          Принять ответ
+        </button>
       </div>
     );
   }
