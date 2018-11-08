@@ -33,13 +33,13 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 5,
+      questionNumber: 6,
       data: {
         id: '',
         email: '',
         tel: '',
         tasks: {
-          programmer: false,
+          programmer: true,
           testing: false,
           analitic: false
         },
@@ -168,7 +168,6 @@ class App extends Component<any, IAppState> {
         return (
           <div>
             <button className="button" onClick={this.nextPage}>
-              {' '}
               Начать тестирование
             </button>
           </div>
@@ -232,7 +231,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 6: {
-        return <Leave />;
+        return <Leave result={this.state.data.tasks} />;
       }
 
       default: {
