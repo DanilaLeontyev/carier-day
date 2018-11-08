@@ -33,7 +33,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 0,
+      questionNumber: 2,
       data: {
         id: '',
         email: '',
@@ -68,7 +68,7 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  handleSubmitEmailAndTel = () => {
+  SubmitEmailAndTel = () => {
     fetch('/api/people', {
       method: 'post',
       headers: {
@@ -109,6 +109,20 @@ class App extends Component<any, IAppState> {
     }));
   };
 
+  algorithmTaskSubmit = (result: boolean) => {
+// TODO: дописать отправку решения на сервер
+
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        tasks: {
+          ...state.data.tasks,
+          programmer: result
+        }
+      }
+    }));
+  };
+
   footerPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
@@ -117,6 +131,21 @@ class App extends Component<any, IAppState> {
             <button className="button" onClick={this.nextPage}>
               {' '}
               Начать тестирование
+            </button>
+          </div>
+        );
+      }
+
+      case 4:
+      case 3:
+      case 2: {
+        return (
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
             </button>
           </div>
         );
@@ -139,7 +168,7 @@ class App extends Component<any, IAppState> {
           <EmailForm
             email={this.state.data.email}
             tel={this.state.data.tel}
-            onFormSubmit={this.handleSubmitEmailAndTel}
+            onFormSubmit={this.SubmitEmailAndTel}
             onEmailChange={this.emailChange}
             onTelChange={this.telChange}
           />
@@ -147,7 +176,7 @@ class App extends Component<any, IAppState> {
       }
 
       case 2: {
-        return <Algorithm />;
+        return <Algorithm onSubmitTask={this.algorithmTaskSubmit} />;
       }
 
       case 3: {
