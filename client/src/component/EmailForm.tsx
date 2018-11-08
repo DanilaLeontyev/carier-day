@@ -3,36 +3,30 @@ import { Component } from 'react';
 import './EmailForm.css';
 import listPic from '../assets/list.png';
 
-interface IEmaiForm {
+interface IEmailFormProps {
   email: string;
   tel: string;
+  onFormSubmit(): void;
+  onEmailChange(email: string): void;
+  onTelChange(tel: string): void;
 }
 
-class EmailForm extends Component<any, IEmaiForm> {
-  constructor(props: any) {
+class EmailForm extends Component<IEmailFormProps> {
+  constructor(props: IEmailFormProps) {
     super(props);
-    this.state = {
-      email: '',
-      tel: ''
-    };
   }
 
   handleEmailChange = (e: any) => {
-    const email = e.target.value;
-    this.setState({
-      email: email
-    });
+    this.props.onEmailChange(e.target.value);
   };
 
-  handleSubmit = (e: any) => {
-    fetch('/api/people', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ data: this.state.email, tel: this.state.tel })
-    });
+  handleTelChange = (e: any) => {
+    this.props.onTelChange(e.target.value);
+  };
+
+  handleSumbit = (e: any) => {
     e.preventDefault();
+    this.props.onFormSubmit();
   };
 
   render() {
@@ -50,20 +44,29 @@ class EmailForm extends Component<any, IEmaiForm> {
             action="/api/people"
             method="post"
             className="EmailForm--form"
-            onSubmit={this.handleSubmit}
+            onSubmit={this.handleSumbit}
           >
             <label htmlFor="email">E-mail(*):</label>
             <input
+              className="form--input"
               id="email"
               type="email"
               required={true}
               onChange={this.handleEmailChange}
             />
             <label htmlFor="tel">Телефон:</label>
-            <input id="tel" type="tel" />
-            <input type="submit" value="Submit" />
+            <input
+              className="form--input"
+              id="tel"
+              type="tel"
+              onChange={this.handleTelChange}
+            />
+            <input
+              className="button form--submit"
+              type="submit"
+              value="Продолжить"
+            />
           </form>
-          <img className="EmailForm--img__landscape" src={listPic} alt="list" />
         </div>
       </div>
     );

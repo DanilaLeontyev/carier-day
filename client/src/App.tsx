@@ -12,17 +12,43 @@ import Leave from './component/Leave';
 
 interface IAppState {
   questionNumber: number;
+  data: IPesonData;
+}
+
+interface IPesonData {
+  id: string;
+  email: string;
+  tel: string;
+  tasks: ITask;
+  choosen: string;
+}
+
+interface ITask {
+  programmer: boolean;
+  testing: boolean;
+  analitic: boolean;
 }
 
 class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 0
+      questionNumber: 0,
+      data: {
+        id: '',
+        email: '',
+        tel: '',
+        tasks: {
+          programmer: false,
+          testing: false,
+          analitic: false
+        },
+        choosen: ''
+      }
     };
   }
 
-  nextPage = (e: any): void => {
+  nextPage = (): void => {
     if (this.state.questionNumber < 6) {
       this.setState(state => {
         return {
@@ -32,13 +58,73 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  prevPage = (e: any): void => {
+  prevPage = (): void => {
     if (this.state.questionNumber > 0) {
       this.setState(state => {
         return {
           questionNumber: state.questionNumber - 1
         };
       });
+    }
+  };
+
+  handleSubmitEmailAndTel = () => {
+    fetch('/api/people', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.data.email,
+        tel: this.state.data.tel
+      })
+    })
+      .then(res => res.json())
+      .then(id => {
+        this.setState(state => ({
+          data: {
+            ...state.data,
+            id: id
+          }
+        }));
+      })
+      .then(() => this.nextPage());
+  };
+
+  emailChange = (email: string) => {
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        email: email
+      }
+    }));
+  };
+
+  telChange = (tel: string) => {
+    this.setState(state => ({
+      data: {
+        ...state.data,
+        tel: tel
+      }
+    }));
+  };
+
+  footerPage = (): JSX.Element => {
+    switch (this.state.questionNumber) {
+      case 0: {
+        return (
+          <div>
+            <button className="button" onClick={this.nextPage}>
+              {' '}
+              Начать тестирование
+            </button>
+          </div>
+        );
+      }
+
+      default: {
+        return <></>;
+      }
     }
   };
 
@@ -49,7 +135,15 @@ class App extends Component<any, IAppState> {
       }
 
       case 1: {
-        return <EmailForm />;
+        return (
+          <EmailForm
+            email={this.state.data.email}
+            tel={this.state.data.tel}
+            onFormSubmit={this.handleSubmitEmailAndTel}
+            onEmailChange={this.emailChange}
+            onTelChange={this.telChange}
+          />
+        );
       }
 
       case 2: {
@@ -78,88 +172,6 @@ class App extends Component<any, IAppState> {
     }
   };
 
-  footerPage = (): JSX.Element => {
-    switch (this.state.questionNumber) {
-      case 0: {
-        return (
-          <button className="button" onClick={this.nextPage}>
-            Начать тестирование
-          </button>
-        );
-      }
-      case 1: {
-        return (
-          <div>
-            <button className="button" onClick={this.prevPage}>
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
-        );
-      }
-      case 2: {
-        return (
-          <div>
-            <button className="button" onClick={this.prevPage}>
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
-        );
-      }
-      case 3: {
-        return (
-          <div>
-            <button className="button" onClick={this.prevPage}>
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
-        );
-      }
-
-      case 4: {
-        return (
-          <div>
-            <button className="button" onClick={this.prevPage}>
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
-        );
-      }
-
-      case 5: {
-        return (
-          <div>
-            <button className="button" onClick={this.prevPage}>
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
-        );
-      }
-
-      case 6: {
-        return <></>;
-      }
-
-      default: {
-        return <span>Error</span>;
-      }
-    }
-  };
-
   render() {
     return (
       <div className="App">
@@ -167,7 +179,7 @@ class App extends Component<any, IAppState> {
           <img className="appHeader--logo" src={logo} />
         </header>
         <main className="appMain">{this.mainPage()}</main>
-        <footer className="appFooter">{this.footerPage()}</footer>
+        <footer>{this.footerPage()}</footer>
       </div>
     );
   }

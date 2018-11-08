@@ -40,9 +40,8 @@ app.post('/api/people', (req, res) => {
       if (err) console.log(err);
       let data = req.body;
       let people = client.db('carier-day').collection('people');
-
       people.insertOne(data, (err, result) => {
-        res.send(data);
+        res.send(data._id);
       });
     }
   );
