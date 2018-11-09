@@ -13,6 +13,7 @@ import Leave from './component/Leave';
 interface IAppState {
   questionNumber: number;
   data: IPesonData;
+  algorithmAnswer: dragItem[];
 }
 
 interface IPesonData {
@@ -29,11 +30,17 @@ interface ITask {
   analitic: boolean;
 }
 
+interface dragItem {
+  id: string;
+  content: string;
+}
+
 class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 1,
+      questionNumber: 2,
+      algorithmAnswer: [],
       data: {
         id: '',
         email: '',
@@ -198,6 +205,13 @@ class App extends Component<any, IAppState> {
     }
   };
 
+  saveDragItem = (items: dragItem[]) => {
+    this.setState(state => ({
+      ...state,
+      algorithmAnswer: items
+    }));
+  };
+
   mainPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
@@ -217,7 +231,13 @@ class App extends Component<any, IAppState> {
       }
 
       case 2: {
-        return <Algorithm onSubmitTask={this.algorithmTaskSubmit} />;
+        return (
+          <Algorithm
+            onSubmitTask={this.algorithmTaskSubmit}
+            items={this.state.algorithmAnswer}
+            onSaveItems={this.saveDragItem}
+          />
+        );
       }
 
       case 3: {

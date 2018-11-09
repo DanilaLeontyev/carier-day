@@ -12,7 +12,9 @@ interface IAlgorithmState {
 }
 
 interface IAlgorithmProps {
+  items: dragItem[];
   onSubmitTask(result: boolean): void;
+  onSaveItems(items: dragItem[]): void;
 }
 
 function shuffle(array: dragItem[]) {
@@ -97,6 +99,8 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
     this.setState({
       items
     });
+
+    this.props.onSaveItems(this.state.items);
   };
 
   reorder = (
@@ -112,6 +116,7 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
 
   handleSubmit = (e: any) => {
     const result = this.checkResult();
+    this.props.onSaveItems(this.state.items);
     this.props.onSubmitTask(result);
   };
 
@@ -155,6 +160,15 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
         </button>
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (this.props.items.length > 0) {
+      this.setState(state => ({
+        ...state,
+        items: this.props.items
+      }));
+    }
   }
 }
 
