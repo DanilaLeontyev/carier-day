@@ -153,11 +153,7 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
               </div>
             )}
           </Droppable>
-        </DragDropContext>
-
-        <button className="button" onClick={this.handleSubmit}>
-          Отправить решение
-        </button>
+      </DragDropContext>
       </div>
     );
   }

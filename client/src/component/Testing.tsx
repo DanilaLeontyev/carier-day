@@ -169,9 +169,6 @@ class Testing extends Component<ITestingProps, ITestingState> {
         <label htmlFor="answer">
           Напишите выражение, которое приводит к ошибке
         </label>
-        <button className="button" onClick={this.handleSubmitTask}>
-          Отправить решение
-        </button>
       </div>
     );
   }

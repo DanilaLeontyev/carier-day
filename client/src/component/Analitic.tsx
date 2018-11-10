@@ -138,10 +138,6 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
         <div className="Analitic--answer">
           Ваш выбор: {this.state.choosenName} {this.state.choosenProf}
         </div>
-
-        <button className="button" onClick={this.handleSubmitTask}>
-          Отправить решение
-        </button>
       </div>
     );
   }
@@ -157,7 +153,7 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
   }
 
   componentWillUnmount() {
-    this.props.onSaveAnswer(this.state.choosenName, this.state.choosenProf)
+    this.props.onSaveAnswer(this.state.choosenName, this.state.choosenProf);
   }
 }
 
