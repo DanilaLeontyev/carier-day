@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import chain from '../assets/chain.png';
 import './Analitic.css';
+import { object } from 'prop-types';
 
 interface IAnaliticState {
   choosenName: string;
@@ -10,6 +11,11 @@ interface IAnaliticState {
 
 interface IAnaliticProps {
   onSubmitTask(result: boolean): void;
+  answer: {
+    name: string;
+    prof: string;
+  };
+  onSaveAnswer(prof: string, name: string): void;
 }
 
 class Analitic extends Component<IAnaliticProps, IAnaliticState> {
@@ -138,6 +144,20 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
         </button>
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (Object.keys(this.props.answer).length > 0) {
+      this.setState(state => ({
+        ...state,
+        choosenName: this.props.answer.name,
+        choosenProf: this.props.answer.prof
+      }));
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.onSaveAnswer(this.state.choosenName, this.state.choosenProf)
   }
 }
 

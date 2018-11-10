@@ -15,6 +15,10 @@ interface IAppState {
   data: IPesonData;
   algorithmAnswer: dragItem[];
   testingAnswer: string;
+  analiticAnswer: {
+    prof: string;
+    name: string;
+  };
 }
 
 interface IPesonData {
@@ -43,6 +47,10 @@ class App extends Component<any, IAppState> {
       questionNumber: 3,
       algorithmAnswer: [],
       testingAnswer: '',
+      analiticAnswer: {
+        prof: '',
+        name: ''
+      },
       data: {
         id: '',
         email: '',
@@ -221,6 +229,16 @@ class App extends Component<any, IAppState> {
     }));
   };
 
+  saveAnaliticAnswer = (name: string, prof: string) => {
+    this.setState(state => ({
+      ...state,
+      analiticAnswer: {
+        name: name,
+        prof: prof 
+      }
+    }));
+  };
+
   mainPage = (): JSX.Element => {
     switch (this.state.questionNumber) {
       case 0: {
@@ -260,7 +278,13 @@ class App extends Component<any, IAppState> {
       }
 
       case 4: {
-        return <Analitic onSubmitTask={this.analiticTaskSubmit} />;
+        return (
+          <Analitic
+            onSubmitTask={this.analiticTaskSubmit}
+            answer={this.state.analiticAnswer}
+            onSaveAnswer={this.saveAnaliticAnswer}
+          />
+        );
       }
 
       case 5: {
