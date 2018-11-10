@@ -45,12 +45,44 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
     this.setState({
       choosenName: value
     });
+
+    const buttons = this.getAllButton();
+    const nameButtons = buttons[1];
+    for (let i = 0; i < nameButtons.length; i++) {
+      if (nameButtons[i].classList.contains('button__selected')) {
+        nameButtons[i].classList.remove('button__selected');
+      }
+    }
+    e.target.className += ' button__selected';
   };
 
   chooseProf = (value: string) => (e: any) => {
     this.setState({
       choosenProf: value
     });
+
+    const buttons = this.getAllButton();
+    const profButtons = buttons[0];
+    for (let i = 0; i < profButtons.length; i++) {
+      if (profButtons[i].classList.contains('button__selected')) {
+        profButtons[i].classList.remove('button__selected');
+      }
+    }
+    e.target.className += ' button__selected';
+  };
+
+  getAllButton = () => {
+    const profButtons: HTMLCollection = document.getElementsByClassName(
+      'profButton'
+    );
+    const nameButtons: HTMLCollection = document.getElementsByClassName(
+      'nameButton'
+    );
+    const buttons: [HTMLCollection, HTMLCollection] = [
+      profButtons,
+      nameButtons
+    ];
+    return buttons;
   };
 
   render() {
@@ -77,28 +109,46 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
           </div>
 
           <div className="buttonContainer--column">
-            <button className="button" onClick={this.chooseName('Андрей')}>
+            <button
+              className="button nameButton"
+              onClick={this.chooseName('Андрей')}
+            >
               Андрей
             </button>
-            <button className="button" onClick={this.chooseProf('Врач')}>
+            <button
+              className="button profButton"
+              onClick={this.chooseProf('Врач')}
+            >
               Врач
             </button>
           </div>
 
           <div className="buttonContainer--column">
-            <button className="button" onClick={this.chooseName('Павел')}>
+            <button
+              className="button nameButton"
+              onClick={this.chooseName('Павел')}
+            >
               Павел
             </button>
-            <button className="button" onClick={this.chooseProf('Продавец')}>
+            <button
+              className="button profButton"
+              onClick={this.chooseProf('Продавец')}
+            >
               Продавец
             </button>
           </div>
 
           <div className="buttonContainer--column">
-            <button className="button" onClick={this.chooseName('Олег')}>
+            <button
+              className="button nameButton"
+              onClick={this.chooseName('Олег')}
+            >
               Олег
             </button>
-            <button className="button" onClick={this.chooseProf('Бухгалтер')}>
+            <button
+              className="button profButton"
+              onClick={this.chooseProf('Бухгалтер')}
+            >
               Бухгалтер
             </button>
           </div>
@@ -108,28 +158,46 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
           <div className="column--label">Имя:</div>
 
           <div className="buttonContainer--row">
-            <button className="button" onClick={this.chooseName('Андрей')}>
+            <button
+              className="button nameButton"
+              onClick={this.chooseName('Андрей')}
+            >
               Андрей
             </button>
-            <button className="button" onClick={this.chooseName('Павел')}>
+            <button
+              className="button nameButton"
+              onClick={this.chooseName('Павел')}
+            >
               Павел
             </button>
-            <button className="button" onClick={this.chooseName('Олег')}>
+            <button
+              className="button nameButton"
+              onClick={this.chooseName('Олег')}
+            >
               Олег
             </button>
           </div>
 
           <div className="column--label">Профессия:</div>
           <div className="buttonContainer--row">
-            <button className="button" onClick={this.chooseProf('Врач')}>
+            <button
+              className="button profButton"
+              onClick={this.chooseProf('Врач')}
+            >
               Врач
             </button>
 
-            <button className="button" onClick={this.chooseProf('Продавец')}>
+            <button
+              className="button profButton"
+              onClick={this.chooseProf('Продавец')}
+            >
               Продавец
             </button>
 
-            <button className="button" onClick={this.chooseProf('Бухгалтер')}>
+            <button
+              className="button profButton"
+              onClick={this.chooseProf('Бухгалтер')}
+            >
               Бухгалтер
             </button>
           </div>
@@ -150,6 +218,23 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
         choosenProf: this.props.answer.prof
       }));
     }
+
+    const buttons = this.getAllButton();
+
+    buttons.forEach(collection => {
+      for (let i = 0; i < collection.length; i++) {
+        if (collection[i].classList.contains('button__selected')) {
+          collection[i].classList.remove('button__selected');
+        }
+
+        if (
+          collection[i].textContent === this.props.answer.name ||
+          collection[i].textContent === this.props.answer.prof
+        ) {
+          collection[i].className += ' button__selected';
+        }
+      }
+    });
   }
 
   componentWillUnmount() {
