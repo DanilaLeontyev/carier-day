@@ -8,6 +8,7 @@ interface IYouWantState {
 
 interface IYouWantPrps {
   onSubmitTask(result: string): void;
+  answer: string;
 }
 
 class YouWant extends Component<IYouWantPrps, IYouWantState> {
@@ -66,6 +67,21 @@ class YouWant extends Component<IYouWantPrps, IYouWantState> {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (this.props.answer) {
+      const profButtons = this.getAllButton();
+      for (let i = 0; i < profButtons.length; i++) {
+        if (profButtons[i].classList.contains('button__selected')) {
+          profButtons[i].classList.remove('button__selected');
+        }
+
+        if (profButtons[i].textContent === this.props.answer) {
+          profButtons[i].className += ' button__selected';
+        }
+      }
+    }
   }
 }
 
