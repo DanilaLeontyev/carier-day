@@ -32,7 +32,7 @@ class EmailForm extends Component<IEmailFormProps> {
   render() {
     return (
       <div className="EmailForm">
-        <img className="EmailForm--img" src={listPic} alt="list" />
+        {/* <img className="EmailForm--img" src={listPic} alt="list" /> */}
 
         <p>
           Введите регистрационные данные
@@ -61,11 +61,11 @@ class EmailForm extends Component<IEmailFormProps> {
               type="tel"
               onChange={this.handleTelChange}
             />
-            <input
+            {/* <input
               className="button form--submit"
               type="submit"
               value="Продолжить"
-            />
+            /> */}
           </form>
         </div>
       </div>

@@ -44,7 +44,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 3,
+      questionNumber: 0,
       algorithmAnswer: [],
       testingAnswer: '',
       analiticAnswer: {
@@ -66,7 +66,7 @@ class App extends Component<any, IAppState> {
   }
 
   nextPage = (): void => {
-    if (this.state.questionNumber < 6) {
+    if (this.state.questionNumber < 5) {
       this.setState(state => {
         return {
           questionNumber: state.questionNumber + 1
@@ -179,42 +179,6 @@ class App extends Component<any, IAppState> {
     }));
   };
 
-  footerPage = (): JSX.Element => {
-    switch (this.state.questionNumber) {
-      case 0: {
-        return (
-          <div>
-            <button className="button" onClick={this.nextPage}>
-              Начать тестирование
-            </button>
-          </div>
-        );
-      }
-
-      case 6:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5: {
-        return (
-          <div>
-            <button className="button" onClick={this.prevPage}>
-              Назад
-            </button>
-            <button className="button" onClick={this.nextPage}>
-              Далее
-            </button>
-          </div>
-        );
-      }
-
-      default: {
-        return <></>;
-      }
-    }
-  };
-
   saveDragItem = (items: dragItem[]) => {
     this.setState(state => ({
       ...state,
@@ -234,9 +198,51 @@ class App extends Component<any, IAppState> {
       ...state,
       analiticAnswer: {
         name: name,
-        prof: prof 
+        prof: prof
       }
     }));
+  };
+
+  footerPage = (): JSX.Element => {
+    switch (this.state.questionNumber) {
+      case 0: {
+        return (
+          <div>
+            <button className="button" onClick={this.nextPage}>
+              Начать тестирование
+            </button>
+          </div>
+        );
+      }
+
+      case 1:
+      case 2:
+      case 3:
+      case 4: {
+        return (
+          <div>
+            <button className="button" onClick={this.prevPage}>
+              Назад
+            </button>
+            <button className="button" onClick={this.nextPage}>
+              Далее
+            </button>
+          </div>
+        );
+      }
+
+      case 5: {
+        return (
+          <button className="button" onClick={this.prevPage}>
+            Назад
+          </button>
+        );
+      }
+
+      default: {
+        return <></>;
+      }
+    }
   };
 
   mainPage = (): JSX.Element => {
@@ -245,19 +251,19 @@ class App extends Component<any, IAppState> {
         return <Greetings />;
       }
 
-      case 1: {
-        return (
-          <EmailForm
-            email={this.state.data.email}
-            tel={this.state.data.tel}
-            onFormSubmit={this.SubmitEmailAndTel}
-            onEmailChange={this.emailChange}
-            onTelChange={this.telChange}
-          />
-        );
-      }
+      // case 1: {
+      //   return (
+      //     <EmailForm
+      //       email={this.state.data.email}
+      //       tel={this.state.data.tel}
+      //       onFormSubmit={this.SubmitEmailAndTel}
+      //       onEmailChange={this.emailChange}
+      //       onTelChange={this.telChange}
+      //     />
+      //   );
+      // }
 
-      case 2: {
+      case 1: {
         return (
           <Algorithm
             onSubmitTask={this.algorithmTaskSubmit}
@@ -267,7 +273,7 @@ class App extends Component<any, IAppState> {
         );
       }
 
-      case 3: {
+      case 2: {
         return (
           <Testing
             onSubmitTask={this.testingTaskSubmit}
@@ -277,7 +283,7 @@ class App extends Component<any, IAppState> {
         );
       }
 
-      case 4: {
+      case 3: {
         return (
           <Analitic
             onSubmitTask={this.analiticTaskSubmit}
@@ -287,12 +293,28 @@ class App extends Component<any, IAppState> {
         );
       }
 
-      case 5: {
-        return <YouWant onSubmitTask={this.chooseProf} />;
+      case 4: {
+        return (
+          <YouWant
+            answer={this.state.data.choosenProf}
+            onSubmitTask={this.chooseProf}
+          />
+        );
       }
 
-      case 6: {
-        return <Leave result={this.state.data.tasks} />;
+      case 5: {
+        return (
+          <div>
+            <Leave result={this.state.data.tasks} />
+            <EmailForm
+              email={this.state.data.email}
+              tel={this.state.data.tel}
+              onFormSubmit={this.SubmitEmailAndTel}
+              onEmailChange={this.emailChange}
+              onTelChange={this.telChange}
+            />
+          </div>
+        );
       }
 
       default: {
