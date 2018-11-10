@@ -1,16 +1,23 @@
-.Analitic--pic {
-  width: 30%;
+.Analitic--task {
+  display: flex;
+  flex-direction: column;
 }
 
-.Analitic--answer {
-  margin: 0 auto;
-  margin-bottom: 15px;
+.task--title {
+  align-self: center;
+  margin-bottom: 20px;
 }
 
-.Analitic--text {
-  margin-top: 15px;
-  margin-bottom: 15px;
+.task--pic {
+  width: 50%;
+  margin-bottom: 20px;
+  align-self: center;
+}
+
+.task--text {
   text-align: left;
+  color: var(--main-theme-color);
+  margin-bottom: 20px;
 }
 
 .Analitic--buttonContainer {
@@ -23,8 +30,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+}
+
+.column--label {
+  margin-bottom: 5px;
 }
 
 .buttonContainer--row .button {
@@ -41,18 +50,28 @@
 }
 
 @media all and (orientation: landscape) {
-  .Analitic--pic {
-    width: 25%;
-    align-self: center;
-  }
-
-  .Analitic--text {
-    margin-left: 10px;
-  }
-
   .Analitic--task {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .task--title {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+
+  .task--pic {
+    flex: 1;
+    max-width: 25%;
+    margin-bottom: 0;
+  }
+
+  .task--text {
+    flex: 1;
+    margin-left: 10px;
+    margin-bottom: 0;
   }
 
   .Analitic--buttonContainer {
@@ -64,8 +83,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: space-around;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
   }
 
   .buttonContainer--column {

@@ -128,7 +128,7 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
     return (
       <div className="Algorithm">
         <p className="Algorithm--text">
-          Переместите строки так, чтобы из этого получился алгоритм бинарного
+          Перемести строки так, чтобы из этого получился алгоритм бинарного
           поиска
         </p>
         <DragDropContext onDragEnd={this.onDragEnd}>
@@ -153,7 +153,7 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
               </div>
             )}
           </Droppable>
-      </DragDropContext>
+        </DragDropContext>
       </div>
     );
   }

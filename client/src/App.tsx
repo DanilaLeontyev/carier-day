@@ -207,8 +207,8 @@ class App extends Component<any, IAppState> {
     switch (this.state.questionNumber) {
       case 0: {
         return (
-          <div>
-            <button className="button" onClick={this.nextPage}>
+          <div className="Footer--buttonContainer">
+            <button className="button  button__last" onClick={this.nextPage}>
               Начать тестирование
             </button>
           </div>
@@ -220,11 +220,11 @@ class App extends Component<any, IAppState> {
       case 3:
       case 4: {
         return (
-          <div>
+          <div className="Footer--buttonContainer">
             <button className="button" onClick={this.prevPage}>
               Назад
             </button>
-            <button className="button" onClick={this.nextPage}>
+            <button className="button button__last" onClick={this.nextPage}>
               Далее
             </button>
           </div>
@@ -233,9 +233,11 @@ class App extends Component<any, IAppState> {
 
       case 5: {
         return (
-          <button className="button" onClick={this.prevPage}>
-            Назад
-          </button>
+          <div className="Footer--buttonContainer">
+            <button className="button  button__last" onClick={this.prevPage}>
+              Назад
+            </button>
+          </div>
         );
       }
 
@@ -330,7 +332,7 @@ class App extends Component<any, IAppState> {
           <img className="appHeader--logo" src={logo} />
         </header>
         <main className="appMain">{this.mainPage()}</main>
-        <footer>{this.footerPage()}</footer>
+        <footer className="appFooter">{this.footerPage()}</footer>
       </div>
     );
   }

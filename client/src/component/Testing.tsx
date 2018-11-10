@@ -129,7 +129,7 @@ class Testing extends Component<ITestingProps, ITestingState> {
   render() {
     return (
       <div className="Testing">
-        <p>Найдите баг в программе</p>
+        <p>Найди баг в программе</p>
         <div className="Testing--calculator">
           <div className="calculator--result">
             <div className="result--expression">{this.state.expression}</div>
@@ -166,9 +166,9 @@ class Testing extends Component<ITestingProps, ITestingState> {
           </div>
         </div>
 
-        <label htmlFor="answer">
+        {/* <label htmlFor="answer">
           Напишите выражение, которое приводит к ошибке
-        </label>
+        </label> */}
       </div>
     );
   }

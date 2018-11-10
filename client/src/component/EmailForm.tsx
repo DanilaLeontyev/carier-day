@@ -35,7 +35,7 @@ class EmailForm extends Component<IEmailFormProps> {
         {/* <img className="EmailForm--img" src={listPic} alt="list" /> */}
 
         <p>
-          Введите регистрационные данные
+          Или отправь нам свой e-mail и мы свяжемся с тобой
           <br />
         </p>
 
@@ -61,11 +61,11 @@ class EmailForm extends Component<IEmailFormProps> {
               type="tel"
               onChange={this.handleTelChange}
             />
-            {/* <input
+            <input
               className="button form--submit"
               type="submit"
               value="Продолжить"
-            /> */}
+            />
           </form>
         </div>
       </div>

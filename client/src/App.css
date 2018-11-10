@@ -6,37 +6,56 @@
 }
 
 .appHeader {
+  padding-top: 20px;
   width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .appHeader--logo {
-  width: 60%;
+  width: 80%;
 }
 
 .appMain {
   width: 90%;
-  text-align: center;
+  margin-bottom: 20px;
 }
 
 .appFooter {
-  width: 100%;
+  width: 90%;
   display: flex;
   margin-bottom: 10px;
   justify-content: center;
+  margin-bottom: 30px;
+}
+
+.Footer--buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Footer--buttonContainer .button {
+  width: 100%;
+  margin-right: 20px;
+}
+
+.Footer--buttonContainer .button__last {
+  margin-right: 0;
 }
 
 @media all and (orientation: landscape) {
   .appHeader {
     justify-content: flex-start;
+    padding-top: 30px;
   }
 
   .appHeader--logo {
     margin-left: 30px;
-    width: 30%;
+    width: 50%;
   }
 
   .appMain {
@@ -44,10 +63,6 @@
   }
 
   .appFooter {
-    justify-content: flex-end;
-  }
-
-  .appFooter:last-child {
-    margin-right: 50px;
+    width: 85%;
   }
 }

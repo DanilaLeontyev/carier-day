@@ -1,7 +1,10 @@
+.EmailForm {
+  margin-top: 20px;
+}
 .EmailForm--form {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .form--input {
@@ -22,9 +25,5 @@
   .EmailForm--img {
     width: 30%;
     margin: 0 auto;
-  }
-
-  .form--submit {
-    margin-bottom: 20px;
   }
 }
