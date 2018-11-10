@@ -8,7 +8,9 @@ interface ITestingState {
 }
 
 interface ITestingProps {
+  answer: string;
   onSubmitTask(result: boolean): void;
+  onSaveAnswer(value: string): void;
 }
 
 class Testing extends Component<ITestingProps, ITestingState> {
@@ -95,27 +97,23 @@ class Testing extends Component<ITestingProps, ITestingState> {
       (value !== '2' && value !== '3') &&
       exp.length < 2
     ) {
-      this.setState(state => {
-        return {
-          expression: value
-        };
-      });
+      this.setState(state => ({
+        ...state,
+        expression: value
+      }));
     } else {
       if (
         (exp[exp.length - 1] === '+' || exp[exp.length - 1] === '-') &&
         (exp[exp.length - 2] === '+' || exp[exp.length - 2] === '-') &&
         (value !== '2' && value !== '3')
       ) {
-        this.setState(state => {
-          return;
-        });
+        return;
       } else {
         if (exp.length <= 15) {
-          this.setState(state => {
-            return {
-              expression: state.expression.concat(value)
-            };
-          });
+          this.setState(state => ({
+            ...state,
+            expression: state.expression.concat(value)
+          }));
         }
       }
     }
@@ -176,6 +174,19 @@ class Testing extends Component<ITestingProps, ITestingState> {
         </button>
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (this.props.answer !== '') {
+      this.setState(state => ({
+        ...state,
+        expression: this.props.answer
+      }));
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.onSaveAnswer(this.state.expression);
   }
 }
 
