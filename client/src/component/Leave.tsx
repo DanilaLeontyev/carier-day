@@ -26,40 +26,39 @@ class Leave extends Component<ILeaveProps, ILeaveState> {
   }
 
   generatePosition = (result: ITask): void => {
-    console.log(result);
     if (result.programmer === true) {
       this.setState({
-        position: 'как отличный Программист!'
+        position: ' как отличный Программист!'
       });
     }
 
     if (result.analitic === true) {
       this.setState({
-        position: 'как смышленый Аналитик!'
+        position: ' как смышленый Аналитик!'
       });
     }
 
     if (result.testing === true) {
       this.setState({
-        position: 'как дотошный Тестер!'
+        position: ' как дотошный Тестер!'
       });
     }
 
     if (result.programmer === true && result.testing === true) {
       this.setState({
-        position: 'Программист и тестер'
+        position: ' как Программист и тестер'
       });
     }
 
     if (result.programmer === true && result.analitic === true) {
       this.setState({
-        position: 'Программист и аналитик'
+        position: ' как Программист и аналитик'
       });
     }
 
     if (result.testing === true && result.analitic === true) {
       this.setState({
-        position: 'ТЕстировщик и аналитик'
+        position: ' как Тестировщик и аналитик'
       });
     }
 
@@ -69,7 +68,7 @@ class Leave extends Component<ILeaveProps, ILeaveState> {
       result.analitic === true
     ) {
       this.setState({
-        position: 'как настоящий Архитектор!'
+        position: ' как настоящий Архитектор!'
       });
     }
   };

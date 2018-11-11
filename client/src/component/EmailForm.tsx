@@ -32,8 +32,6 @@ class EmailForm extends Component<IEmailFormProps> {
   render() {
     return (
       <div className="EmailForm">
-        {/* <img className="EmailForm--img" src={listPic} alt="list" /> */}
-
         <p>
           Или отправь нам свой e-mail и мы свяжемся с тобой
           <br />

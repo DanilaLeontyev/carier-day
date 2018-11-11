@@ -55,18 +55,18 @@ class App extends Component<any, IAppState> {
         id: '',
         email: '',
         tel: '',
+        choosenProf: '',
         tasks: {
           programmer: false,
           testing: false,
           analitic: false
-        },
-        choosenProf: ''
+        }
       }
     };
   }
 
   nextPage = (): void => {
-    if (this.state.questionNumber < 5) {
+    if (this.state.questionNumber < 6) {
       this.setState(state => {
         return {
           questionNumber: state.questionNumber + 1
@@ -93,19 +93,16 @@ class App extends Component<any, IAppState> {
       },
       body: JSON.stringify({
         email: this.state.data.email,
-        tel: this.state.data.tel
+        tel: this.state.data.tel,
+        result: this.state.data.tasks,
+        choosenProf: this.state.data.choosenProf,
+        answers: {
+          algorithm: this.state.algorithmAnswer,
+          tester: this.state.testingAnswer,
+          analitic: this.state.analiticAnswer
+        }
       })
-    })
-      .then(res => res.json())
-      .then(id => {
-        this.setState(state => ({
-          data: {
-            ...state.data,
-            id: id
-          }
-        }));
-      })
-      .then(() => this.nextPage());
+    }).then(() => this.nextPage());
   };
 
   emailChange = (email: string) => {
@@ -253,18 +250,6 @@ class App extends Component<any, IAppState> {
         return <Greetings />;
       }
 
-      // case 1: {
-      //   return (
-      //     <EmailForm
-      //       email={this.state.data.email}
-      //       tel={this.state.data.tel}
-      //       onFormSubmit={this.SubmitEmailAndTel}
-      //       onEmailChange={this.emailChange}
-      //       onTelChange={this.telChange}
-      //     />
-      //   );
-      // }
-
       case 1: {
         return (
           <Algorithm
@@ -317,6 +302,10 @@ class App extends Component<any, IAppState> {
             />
           </div>
         );
+      }
+
+      case 6: {
+        return <div>Мы получили твои данные! Жди звонка)</div>;
       }
 
       default: {
