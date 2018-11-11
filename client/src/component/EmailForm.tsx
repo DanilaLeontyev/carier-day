@@ -64,7 +64,7 @@ class EmailForm extends Component<IEmailFormProps> {
             <input
               className="button form--submit"
               type="submit"
-              value="Продолжить"
+              value="Отправить"
             />
           </form>
         </div>
