@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 10px;
+}
+
+.Greetings--text {
+  margin-top: 20px;
 }
 
 @media all and (orientation: landscape) {
@@ -12,5 +15,6 @@
 
   .Greetings--text {
     margin-left: 30px;
+    margin-top: 0;
   }
 }

@@ -11,30 +11,37 @@ interface IAlgorithmState {
   items: dragItem[];
 }
 
+interface IAlgorithmProps {
+  items: dragItem[];
+  onSubmitTask(result: boolean): void;
+  onSaveItems(items: dragItem[]): void;
+}
+
 function shuffle(array: dragItem[]) {
-  let currentIndex = array.length,
+  let newArray = [...array];
+  let currentIndex = newArray.length,
     temporaryValue,
     randomIndex;
 
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+    temporaryValue = newArray[currentIndex];
+    newArray[currentIndex] = newArray[randomIndex];
+    newArray[randomIndex] = temporaryValue;
   }
 
-  return array;
+  return newArray;
 }
 
 const data = [
   {
     id: '1',
-    content: 'function binarySearch(value, array[])'
+    content: 'function binarySearch(value, list[])'
   },
   {
     id: '2',
-    content: `start <- 0; stop <- list.len - 1; `
+    content: 'start <- 0; stop <- list.len - 1;'
   },
   {
     id: '3',
@@ -42,23 +49,23 @@ const data = [
   },
   {
     id: '4',
-    content: 'if (value = list[middle]'
+    content: 'middle <- (start + stop) / 2'
   },
   {
     id: '5',
-    content: 'return middle'
+    content: 'if (value = list[middle])'
   },
   {
     id: '6',
-    content: 'else if(value < list[middle])'
+    content: 'return middle'
   },
   {
     id: '7',
-    content: 'stop <- middle - 1'
+    content: 'else if(value < list[middle])'
   },
   {
     id: '8',
-    content: 'middle <- (start + stop) / 2'
+    content: 'stop <- middle - 1;'
   },
   {
     id: '9',
@@ -70,8 +77,8 @@ const data = [
   }
 ];
 
-class Algorithm extends Component<any, IAlgorithmState> {
-  constructor(props: any) {
+class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
+  constructor(props: IAlgorithmProps) {
     super(props);
     this.state = {
       items: shuffle(data)
@@ -92,6 +99,8 @@ class Algorithm extends Component<any, IAlgorithmState> {
     this.setState({
       items
     });
+
+    this.props.onSaveItems(this.state.items);
   };
 
   reorder = (
@@ -105,11 +114,15 @@ class Algorithm extends Component<any, IAlgorithmState> {
     return result;
   };
 
+  checkResult = () => {
+    return JSON.stringify(this.state.items) === JSON.stringify(data);
+  };
+
   render() {
     return (
       <div className="Algorithm">
         <p className="Algorithm--text">
-          Расположите строки так, чтобы из этого получился алгоритм бинарного
+          Перемести строки так, чтобы из этого получился алгоритм бинарного
           поиска
         </p>
         <DragDropContext onDragEnd={this.onDragEnd}>
@@ -137,6 +150,19 @@ class Algorithm extends Component<any, IAlgorithmState> {
         </DragDropContext>
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (this.props.items.length > 0) {
+      this.setState(state => ({
+        ...state,
+        items: this.props.items
+      }));
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.onSubmitTask(this.checkResult());
   }
 }
 

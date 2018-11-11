@@ -7,19 +7,81 @@ interface ILeaveState {
   position: string;
 }
 
-class Leave extends Component<any, ILeaveState> {
-  constructor(props: any) {
+interface ILeaveProps {
+  result: ITask;
+}
+
+interface ITask {
+  programmer: boolean;
+  testing: boolean;
+  analitic: boolean;
+}
+
+class Leave extends Component<ILeaveProps, ILeaveState> {
+  constructor(props: ILeaveProps) {
     super(props);
     this.state = {
-      position: 'Аналитик'
+      position: ''
     };
+  }
+
+  generatePosition = (result: ITask): void => {
+    if (result.programmer === true) {
+      this.setState({
+        position: ' как отличный Программист!'
+      });
+    }
+
+    if (result.analitic === true) {
+      this.setState({
+        position: ' как смышленый Аналитик!'
+      });
+    }
+
+    if (result.testing === true) {
+      this.setState({
+        position: ' как дотошный Тестер!'
+      });
+    }
+
+    if (result.programmer === true && result.testing === true) {
+      this.setState({
+        position: ' как Программист и тестер'
+      });
+    }
+
+    if (result.programmer === true && result.analitic === true) {
+      this.setState({
+        position: ' как Программист и аналитик'
+      });
+    }
+
+    if (result.testing === true && result.analitic === true) {
+      this.setState({
+        position: ' как Тестировщик и аналитик'
+      });
+    }
+
+    if (
+      result.testing === true &&
+      result.programmer === true &&
+      result.analitic === true
+    ) {
+      this.setState({
+        position: ' как настоящий Архитектор!'
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.generatePosition(this.props.result);
   }
 
   render() {
     return (
       <div className="Leave">
         <p>
-          Поздравляем! В результате тестирования ты проявил себя как{' '}
+          Поздравляем! В результате тестирования ты проявил себя
           {this.state.position} <br />
           Мы ждем твое резюме по адресу:{' '}
           <a href="mailto:65rcr_resume@cbr.ru">65rcr_resume@cbr.ru</a>

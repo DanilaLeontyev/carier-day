@@ -7,8 +7,14 @@ interface ITestingState {
   result: number | string;
 }
 
-class Testing extends Component<any, ITestingState> {
-  constructor(props: any) {
+interface ITestingProps {
+  answer: string;
+  onSubmitTask(result: boolean): void;
+  onSaveAnswer(value: string): void;
+}
+
+class Testing extends Component<ITestingProps, ITestingState> {
+  constructor(props: ITestingProps) {
     super(props);
     this.state = {
       expression: '',
@@ -16,18 +22,36 @@ class Testing extends Component<any, ITestingState> {
     };
   }
 
+  checkResult = (value: string) => {
+    let wrongAnswer = value
+      .replace(/[^-()\d/*+.]/g, '')
+      .replace(/-{2,}/g, '+')
+      .replace(/\+{2,}/g, '+')
+      .replace(/\+-/g, '+') // тут ошибка, должен быть -
+      .replace(/-\+/g, '-');
+    wrongAnswer = this.checkEnd(wrongAnswer);
+
+    let rightAnswer = value
+      .replace(/[^-()\d/*+.]/g, '')
+      .replace(/-{2,}/g, '+')
+      .replace(/\+{2,}/g, '+')
+      .replace(/\+-/g, '-') // тут ошибка, должен быть -
+      .replace(/-\+/g, '-');
+    rightAnswer = this.checkEnd(rightAnswer);
+
+    if (rightAnswer === wrongAnswer) {
+      return false;
+    } else return true;
+  };
+
   checkEnd = (values: string) => {
-    let newValues;
-    if (
+    while (
       values[values.length - 1] === '+' ||
       values[values.length - 1] === '-'
     ) {
       values = values.slice(0, -1);
-      this.checkEnd(values);
-    } else {
-      newValues = values;
     }
-    return newValues ? newValues : '0';
+    return values;
   };
 
   calculateResult = () => {
@@ -40,7 +64,7 @@ class Testing extends Component<any, ITestingState> {
       .replace(/-\+/g, '-');
 
     values = this.checkEnd(values);
-    
+
     try {
       result = eval(values);
     } catch {
@@ -57,16 +81,36 @@ class Testing extends Component<any, ITestingState> {
   addToExpression = (value: string) => (
     e: React.SyntheticEvent<EventTarget>
   ) => {
+    let exp = this.state.expression;
+
     if (!(e.target instanceof HTMLButtonElement)) {
       return;
     }
 
-    if (this.state.expression.length <= 15) {
-      this.setState(state => {
-        return {
-          expression: state.expression.concat(value)
-        };
-      });
+    if (
+      (exp[0] === '+' || exp[0] === '-') &&
+      (value !== '2' && value !== '3') &&
+      exp.length < 2
+    ) {
+      this.setState(state => ({
+        ...state,
+        expression: value
+      }));
+    } else {
+      if (
+        (exp[exp.length - 1] === '+' || exp[exp.length - 1] === '-') &&
+        (exp[exp.length - 2] === '+' || exp[exp.length - 2] === '-') &&
+        (value !== '2' && value !== '3')
+      ) {
+        return;
+      } else {
+        if (exp.length <= 15) {
+          this.setState(state => ({
+            ...state,
+            expression: state.expression.concat(value)
+          }));
+        }
+      }
     }
   };
 
@@ -80,7 +124,7 @@ class Testing extends Component<any, ITestingState> {
   render() {
     return (
       <div className="Testing">
-        <p>Найдите баг в программе</p>
+        <p>Найди баг в программе</p>
         <div className="Testing--calculator">
           <div className="calculator--result">
             <div className="result--expression">{this.state.expression}</div>
@@ -117,18 +161,25 @@ class Testing extends Component<any, ITestingState> {
           </div>
         </div>
 
-        <label htmlFor="answer">
-          {' '}
-          Напишите выражение, которое приводит к ошибке{' '}
-        </label>
-        <input
-          id="answer"
-          className="Testing--answer"
-          type="tel"
-          placeholder="Выражение"
-        />
+        {/* <label htmlFor="answer">
+          Напишите выражение, которое приводит к ошибке
+        </label> */}
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (this.props.answer !== '') {
+      this.setState(state => ({
+        ...state,
+        expression: this.props.answer
+      }));
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.onSaveAnswer(this.state.expression);
+    this.props.onSubmitTask(this.checkResult(this.state.expression));
   }
 }
 

@@ -5,8 +5,14 @@ import lamp from '../assets/lamp.png';
 interface IYouWantState {
   choosenProf: string;
 }
-class YouWant extends Component<any, IYouWantState> {
-  constructor(props: any) {
+
+interface IYouWantPrps {
+  onSubmitTask(result: string): void;
+  answer: string;
+}
+
+class YouWant extends Component<IYouWantPrps, IYouWantState> {
+  constructor(props: IYouWantPrps) {
     super(props);
     this.state = {
       choosenProf: ''
@@ -25,6 +31,8 @@ class YouWant extends Component<any, IYouWantState> {
     this.setState({
       choosenProf: choosenProf
     });
+
+    this.props.onSubmitTask(choosenProf);
   };
 
   getAllButton = () => {
@@ -59,6 +67,21 @@ class YouWant extends Component<any, IYouWantState> {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    if (this.props.answer) {
+      const profButtons = this.getAllButton();
+      for (let i = 0; i < profButtons.length; i++) {
+        if (profButtons[i].classList.contains('button__selected')) {
+          profButtons[i].classList.remove('button__selected');
+        }
+
+        if (profButtons[i].textContent === this.props.answer) {
+          profButtons[i].className += ' button__selected';
+        }
+      }
+    }
   }
 }
 

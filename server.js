@@ -16,17 +16,18 @@ const MONGO_COL_NAME = 'people';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/data', (req, res) => {
+app.post('/api/people', (req, res) => {
   MongoClient.connect(
     MONGO_URL,
     { useNewUrlParser: true },
     (err, client) => {
       if (err) console.log(err);
-      let movies = client.db(MONGO_DB_NAME).collection(MONGO_COL_NAME);
-
-      movies.find().toArray((err, result) => {
-        if (err) console.log(err);
-        res.send(result);
+      const data = req.body;
+      const people = client.db(MONGO_DB_NAME).collection(MONGO_COL_NAME);
+      people.insertOne(data, (err, result) => {
+        if (err) {
+          res.send(error);
+        } else res.send(result);
       });
     }
   );
