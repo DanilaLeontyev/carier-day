@@ -22,11 +22,6 @@ class Testing extends Component<ITestingProps, ITestingState> {
     };
   }
 
-  handleSubmitTask = (e: any) => {
-    const result = this.checkResult(this.state.expression);
-    this.props.onSubmitTask(result);
-  };
-
   checkResult = (value: string) => {
     let wrongAnswer = value
       .replace(/[^-()\d/*+.]/g, '')
@@ -184,6 +179,7 @@ class Testing extends Component<ITestingProps, ITestingState> {
 
   componentWillUnmount() {
     this.props.onSaveAnswer(this.state.expression);
+    this.props.onSubmitTask(this.checkResult(this.state.expression));
   }
 }
 

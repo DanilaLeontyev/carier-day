@@ -27,11 +27,6 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
     };
   }
 
-  handleSubmitTask = (e: any) => {
-    const result = this.checkResult();
-    this.props.onSubmitTask(result);
-  };
-
   checkResult = (): boolean => {
     if (
       this.state.choosenName === 'Андрей' &&
@@ -235,6 +230,7 @@ class Analitic extends Component<IAnaliticProps, IAnaliticState> {
 
   componentWillUnmount() {
     this.props.onSaveAnswer(this.state.choosenName, this.state.choosenProf);
+    this.props.onSubmitTask(this.checkResult());
   }
 }
 

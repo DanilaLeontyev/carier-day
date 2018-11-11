@@ -114,12 +114,6 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
     return result;
   };
 
-  handleSubmit = (e: any) => {
-    const result = this.checkResult();
-    this.props.onSaveItems(this.state.items);
-    this.props.onSubmitTask(result);
-  };
-
   checkResult = () => {
     return JSON.stringify(this.state.items) === JSON.stringify(data);
   };
@@ -165,6 +159,10 @@ class Algorithm extends Component<IAlgorithmProps, IAlgorithmState> {
         items: this.props.items
       }));
     }
+  }
+
+  componentWillUnmount() {
+    this.props.onSubmitTask(this.checkResult());
   }
 }
 
