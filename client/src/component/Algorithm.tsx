@@ -69,7 +69,7 @@ const data = [
   },
   {
     id: '9',
-    content: 'else return start <- middle + 1'
+    content: 'else start <- middle + 1'
   },
   {
     id: '10',
