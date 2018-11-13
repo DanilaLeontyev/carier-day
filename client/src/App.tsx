@@ -307,13 +307,27 @@ class App extends Component<any, IAppState> {
       }
 
       case 6: {
-        return <div>Мы получили твои данные! Жди звонка)</div>;
+        return (
+          <div>
+            Мы получили твои данные! Жди звонка) Ты решил {this.countTask()} из
+            3 задач
+          </div>
+        );
       }
 
       default: {
         return <span>Error</span>;
       }
     }
+  };
+
+  countTask = (): number => {
+    let count = 0;
+    if (this.state.data.tasks.analitic) count++;
+    if (this.state.data.tasks.programmer) count++;
+    if (this.state.data.tasks.testing) count++;
+
+    return count;
   };
 
   render() {
