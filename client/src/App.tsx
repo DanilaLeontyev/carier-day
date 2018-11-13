@@ -102,7 +102,9 @@ class App extends Component<any, IAppState> {
           analitic: this.state.analiticAnswer
         }
       })
-    }).then(() => this.nextPage());
+    });
+
+    this.nextPage();
   };
 
   emailChange = (email: string) => {
