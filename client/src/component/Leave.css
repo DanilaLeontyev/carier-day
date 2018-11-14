@@ -7,4 +7,9 @@
 .Leave {
   display: flex;
   flex-direction: column;
+  line-height: 25px;
+}
+
+.Leave--anchor {
+  text-decoration: none;
 }
