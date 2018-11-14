@@ -47,6 +47,21 @@
   margin-right: 0;
 }
 
+.boy--pic {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.appLeave {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.appLeave--text {
+  margin-bottom: 20px;
+}
+
 @media all and (orientation: landscape) {
   .appHeader {
     justify-content: flex-start;

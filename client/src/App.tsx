@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './assets/logo.svg';
+import boy from './assets/boy.png';
 import './App.css';
 import './component/Greetings';
 import axios from 'axios';
@@ -48,7 +49,7 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 5,
+      questionNumber: 0,
       algorithmAnswer: [],
       testingAnswer: '',
       emailIsValid: true,
@@ -366,10 +367,26 @@ class App extends Component<any, IAppState> {
 
       case 6: {
         return (
-          <div>
-            Мы получили твои данные! Жди звонка) Ты решил {this.countTask()} из
-            3 задач
-            <button onClick={this.downloadPDF}>Скачать</button>
+          <div className="appLeave">
+            {this.countTask() > 0 && (
+              <p className="appLeave--text">
+                Благодарим за проявленный интерес, вы решили {this.countTask()}{' '}
+                из 3-х задач!
+              </p>
+            )}
+            {this.countTask() === 0 && (
+              <p className="appLeave--text">
+                Благодарим за проявленный интерес!
+              </p>
+            )}
+            <img className="boy--pic" src={boy} />
+            <p className="appLeave--text">
+              Если у вас не началось скачивание сертификата, нажмите кнопку
+              "Скачать сертификат"
+            </p>
+            <button className="button" onClick={this.downloadPDF}>
+              Скачать сертификат
+            </button>
           </div>
         );
       }
