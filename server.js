@@ -37,15 +37,15 @@ app.post('/api/people', (req, res) => {
 });
 
 app.get('/file', (req, res) => {
-  res.download('./pdf/invoice.pdf');
+  res.download('./pdf/certificate.pdf');
 });
 
 app.get('/api/people', (req, res) => {
-  const file = fs.createReadStream('./pdf/invoice.pdf');
-  const data = fs.statSync('./pdf/invoice.pdf');
+  const file = fs.createReadStream('./pdf/certificate.pdf');
+  const data = fs.statSync('./pdf/certificate.pdf');
   res.setHeader('Content-Length', data.size);
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename=invoice.pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=certificate.pdf');
   file.pipe(res);
 });
 
