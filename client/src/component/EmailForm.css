@@ -21,6 +21,10 @@
   display: none;
 }
 
+.formLabel__invalid {
+  color: red;
+}
+
 @media all and (orientation: landscape) {
   .EmailForm--img {
     width: 30%;

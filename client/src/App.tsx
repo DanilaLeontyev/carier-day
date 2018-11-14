@@ -17,6 +17,8 @@ interface IAppState {
   data: IPesonData;
   algorithmAnswer: dragItem[];
   testingAnswer: string;
+  emailIsValid: boolean;
+  telIsValid: boolean;
   analiticAnswer: {
     prof: string;
     name: string;
@@ -46,9 +48,11 @@ class App extends Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      questionNumber: 0,
+      questionNumber: 5,
       algorithmAnswer: [],
       testingAnswer: '',
+      emailIsValid: true,
+      telIsValid: true,
       analiticAnswer: {
         prof: '',
         name: ''
@@ -88,39 +92,44 @@ class App extends Component<any, IAppState> {
   };
 
   SubmitEmailAndTel = () => {
-    fetch('/api/people', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.data.email,
-        tel: this.state.data.tel,
-        result: this.state.data.tasks,
-        choosenProf: this.state.data.choosenProf,
-        answers: {
-          algorithm: this.state.algorithmAnswer,
-          tester: this.state.testingAnswer,
-          analitic: this.state.analiticAnswer
-        }
-      })
-    });
-
-    axios(`/api/people`, {
-      method: 'GET',
-      responseType: 'blob' //Force to receive data in a Blob Format
-    })
-      .then(response => {
-        const file = new Blob([response.data], { type: 'application/pdf' });
-        const fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
-      })
-
-      .catch(error => {
-        console.log(error);
+    if (this.state.emailIsValid) {
+      fetch('/api/people', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.data.email,
+          tel: this.state.data.tel,
+          result: this.state.data.tasks,
+          choosenProf: this.state.data.choosenProf,
+          answers: {
+            algorithm: this.state.algorithmAnswer,
+            tester: this.state.testingAnswer,
+            analitic: this.state.analiticAnswer
+          }
+        })
       });
 
-    this.nextPage();
+      axios(`/api/people`, {
+        method: 'GET',
+        responseType: 'blob' //Force to receive data in a Blob Format
+      })
+        .then(response => {
+          const file = new Blob([response.data], { type: 'application/pdf' });
+          const fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+        })
+
+        .catch(error => {
+          console.log(error);
+        });
+
+      this.nextPage();
+    } else {
+      const input = document.getElementById('email');
+      if (input) input.focus();
+    }
   };
 
   downloadPDF = () => {
@@ -135,6 +144,20 @@ class App extends Component<any, IAppState> {
   };
 
   emailChange = (email: string) => {
+    const reg = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
+
+    if (reg.test(email)) {
+      this.setState(state => ({
+        ...state,
+        emailIsValid: true
+      }));
+    } else {
+      this.setState(state => ({
+        ...state,
+        emailIsValid: false
+      }));
+    }
+
     this.setState(state => ({
       data: {
         ...state.data,
@@ -144,6 +167,20 @@ class App extends Component<any, IAppState> {
   };
 
   telChange = (tel: string) => {
+    const reg = /^((\+7|7|8)+([0-9]){10})$/gm;
+
+    if (reg.test(tel)) {
+      this.setState(state => ({
+        ...state,
+        telIsValid: true
+      }));
+    } else {
+      this.setState(state => ({
+        ...state,
+        telIsValid: false
+      }));
+    }
+
     this.setState(state => ({
       data: {
         ...state.data,
@@ -153,8 +190,6 @@ class App extends Component<any, IAppState> {
   };
 
   algorithmTaskSubmit = (result: boolean) => {
-    // TODO: дописать отправку решения на сервер
-
     this.setState(state => ({
       data: {
         ...state.data,
@@ -167,8 +202,6 @@ class App extends Component<any, IAppState> {
   };
 
   testingTaskSubmit = (result: boolean) => {
-    // TODO: дописать отправку решения на сервер
-
     this.setState(state => ({
       data: {
         ...state.data,
@@ -181,8 +214,6 @@ class App extends Component<any, IAppState> {
   };
 
   analiticTaskSubmit = (result: boolean) => {
-    // TODO: дописать отправку решения на сервер
-
     this.setState(state => ({
       data: {
         ...state.data,
@@ -195,8 +226,6 @@ class App extends Component<any, IAppState> {
   };
 
   chooseProf = (result: string) => {
-    // TODO: дописать отправку решения на сервер
-
     this.setState(state => ({
       data: {
         ...state.data,
@@ -328,6 +357,8 @@ class App extends Component<any, IAppState> {
               onFormSubmit={this.SubmitEmailAndTel}
               onEmailChange={this.emailChange}
               onTelChange={this.telChange}
+              emailIsValid={this.state.emailIsValid}
+              telIsValid={this.state.telIsValid}
             />
           </div>
         );
