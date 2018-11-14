@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './assets/logo.svg';
 import './App.css';
 import './component/Greetings';
+import axios from 'axios';
+import download from 'downloadjs';
 import Greetings from './component/Greetings';
 import Algorithm from './component/Algorithm';
 import EmailForm from './component/EmailForm';
@@ -87,7 +89,7 @@ class App extends Component<any, IAppState> {
 
   SubmitEmailAndTel = () => {
     fetch('/api/people', {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -104,7 +106,32 @@ class App extends Component<any, IAppState> {
       })
     });
 
+    axios(`/api/people`, {
+      method: 'GET',
+      responseType: 'blob' //Force to receive data in a Blob Format
+    })
+      .then(response => {
+        const file = new Blob([response.data], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+      })
+
+      .catch(error => {
+        console.log(error);
+      });
+
     this.nextPage();
+  };
+
+  downloadPDF = () => {
+    fetch('/file', {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/pdf'
+      }
+    })
+      .then(res => res.blob())
+      .then(blob => download(blob));
   };
 
   emailChange = (email: string) => {
@@ -311,6 +338,7 @@ class App extends Component<any, IAppState> {
           <div>
             Мы получили твои данные! Жди звонка) Ты решил {this.countTask()} из
             3 задач
+            <button onClick={this.downloadPDF}>Скачать</button>
           </div>
         );
       }

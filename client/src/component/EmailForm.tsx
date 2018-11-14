@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
 import './EmailForm.css';
-import listPic from '../assets/list.png';
 
 interface IEmailFormProps {
   email: string;

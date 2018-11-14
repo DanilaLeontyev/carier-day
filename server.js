@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const fs = require('fs');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -27,17 +28,30 @@ app.post('/api/people', (req, res) => {
       people.insertOne(data, (err, result) => {
         if (err) {
           res.send(error);
-        } else res.send(result);
+        } else {
+          res.send(result);
+        }
       });
     }
   );
 });
 
+app.get('/file', (req, res) => {
+  res.download('./pdf/invoice.pdf');
+});
+
+app.get('/api/people', (req, res) => {
+  const file = fs.createReadStream('./pdf/invoice.pdf');
+  const data = fs.statSync('./pdf/invoice.pdf');
+  res.setHeader('Content-Length', data.size);
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=invoice.pdf');
+  file.pipe(res);
+});
+
 if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
 
-  // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
