@@ -7,16 +7,16 @@
 
 .appHeader {
   padding-top: 20px;
-  width: 100%;
+  width: 90%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 20px;
 }
 
 .appHeader--logo {
-  width: 80%;
+  height: 15vh;
 }
 
 .appMain {
@@ -64,13 +64,12 @@
 
 @media all and (orientation: landscape) {
   .appHeader {
-    justify-content: flex-start;
     padding-top: 30px;
+    width: 85%;
   }
 
   .appHeader--logo {
-    margin-left: 30px;
-    width: 50%;
+    height: 30vh;
   }
 
   .appMain {
