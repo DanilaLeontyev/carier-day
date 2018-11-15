@@ -35,7 +35,7 @@ class Testing extends Component<ITestingProps, ITestingState> {
       .replace(/[^-()\d/*+.]/g, '')
       .replace(/-{2,}/g, '+')
       .replace(/\+{2,}/g, '+')
-      .replace(/\+-/g, '-') // тут ошибка, должен быть -
+      .replace(/\+-/g, '-')
       .replace(/-\+/g, '-');
     rightAnswer = this.checkEnd(rightAnswer);
 
@@ -104,7 +104,7 @@ class Testing extends Component<ITestingProps, ITestingState> {
       ) {
         return;
       } else {
-        if (exp.length <= 15) {
+        if (exp.length <= 8) {
           this.setState(state => ({
             ...state,
             expression: state.expression.concat(value)
@@ -124,7 +124,7 @@ class Testing extends Component<ITestingProps, ITestingState> {
   render() {
     return (
       <div className="Testing">
-        <p>Найди баг в программе</p>
+        <p>Попробуй найти баг. Как только найдешь, жми "Далее". </p>
         <div className="Testing--calculator">
           <div className="calculator--result">
             <div className="result--expression">{this.state.expression}</div>
@@ -160,10 +160,6 @@ class Testing extends Component<ITestingProps, ITestingState> {
             </div>
           </div>
         </div>
-
-        {/* <label htmlFor="answer">
-          Напишите выражение, которое приводит к ошибке
-        </label> */}
       </div>
     );
   }
